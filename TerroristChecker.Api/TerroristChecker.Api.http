@@ -1,0 +1,29 @@
+@TerroristChecker.Api_HostAddress = http://localhost:5022
+
+GET {{TerroristChecker.Api_HostAddress}}/terrorists/search/?input={{input}}&yearOfBirth={{yearOfBirth}}
+Content-Type: text/plain
+
+> {%
+    client.global.set("input", "Abd al-Khaliq Badr al-Din al-Huthi")
+    client.global.set("yearOfBirth", "1984")
+%}
+###
+
+GET {{TerroristChecker.Api_HostAddress}}/terrorists/search/?input={{input}}
+Content-Type: text/plain
+
+> {%
+    client.global.set("input", "Abd al-Khaliq Badr al-Din al-Huthi")
+%}
+###
+
+GET {{TerroristChecker.Api_HostAddress}}/terrorists/search/?input={{input}}&minCoefficient={{minCoefficient}}&minAverageCoefficient={{minAverageCoefficient}}&count={{count}}
+Content-Type: text/plain
+
+> {%
+    client.global.set("input", "abdulkarimov mogamed usmanovich")
+    client.global.set("count", "10")
+    client.global.set("minCoefficient", "0.41")
+    client.global.set("minAverageCoefficient", "0.7")
+%}
+###

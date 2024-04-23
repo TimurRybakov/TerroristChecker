@@ -1,0 +1,16 @@
+Microsoft.AspNetCore.Http.BadHttpRequestException: Failed to bind parameter "Nullable<double> minCoefficient" from "{{minCoefficient}}".
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.Log.ParameterBindingFailed(HttpContext httpContext, String parameterTypeName, String parameterName, String sourceValue, Boolean shouldThrow)
+   at lambda_method23(Closure, Object, HttpContext)
+   at Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+
+HEADERS
+=======
+Connection: keep-alive
+Host: localhost:7082
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+Content-Type: text/plain

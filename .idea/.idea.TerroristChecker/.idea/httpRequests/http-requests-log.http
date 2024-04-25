@@ -1,500 +1,500 @@
-﻿GET http://localhost:5022/terrorists/search/?input=Abd al-Khaliq Badr al-Din al-Huthi&yearOfBirth=1984
+﻿GET https://localhost:7082/terrorists/search/?input=abdulkarimov mogamed usmanovich
 Content-Type: text/plain
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
-<> 2024-04-20T005121.200.json
+<> 2024-04-25T112355.200.json
 
 ###
 
-GET http://localhost:5022/terrorists/search/?input=Abd al-Khaliq Badr al-Din al-Huthi
+GET https://localhost:7082/terrorists/search/?input=Abd al-Khaliq Badr al-Din al-Huthi&minCoefficient=0.41&minAverageCoefficient=0.4&count=10
 Content-Type: text/plain
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
-<> 2024-04-20T005114.200.json
+<> 2024-04-25T112351.200.json
 
 ###
 
-GET http://localhost:5022/terrorists/search/?input=abdulkarimov mogamed usmanovich
+GET https://localhost:7082/terrorists/search/?input=abdulkarimov mogamed usmanovich&yearOfBirth=1984
 Content-Type: text/plain
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
-<> 2024-04-20T005109.200.json
+<> 2024-04-25T112348.200.json
 
 ###
 
-GET http://localhost:5022/terrorists/search/?input=abdulkarimov mogamed usmanovich&minCoefficient=0.41&minAverageCoefficient=0.7&count=10
+GET https://localhost:7082/terrorists/search/?input=Abd al-Khaliq Badr al-Din Huthi&minCoefficient=0.41&minAverageCoefficient=0.4&count=10
 Content-Type: text/plain
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
-<> 2024-04-20T005055.200.json
+<> 2024-04-25T112345.200.json
 
 ###
 
-GET http://localhost:5022/terrorists/search/?input=abdulkarimov mogamed usmanovich&minCoefficient=0.41&minAverageCoefficient=0.7&count=10
+GET https://localhost:7082/terrorists/search/?input=abdulkarimov mogamed usmanovich
 Content-Type: text/plain
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
-<> 2024-04-19T105848.200.json
+<> 2024-04-25T112341.200.json
 
 ###
 
-GET http://localhost:5022/terrorists/search/?input=abdulkarimov mogamed usmanovich&minCoefficient=0.41&minAverageCoefficient=0.8&count=10
+GET https://localhost:7082/terrorists/search/?input=abdulkarimov mogamed usmanovich&minCoefficient=0.41&minAverageCoefficient=0.4&count=10
 Content-Type: text/plain
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
-<> 2024-04-19T105847.200.json
+<> 2024-04-25T021320.200.json
 
 ###
 
-GET http://localhost:5022/terrorists/search/?input=abdulkarimov mogamed usmanovich&minCoefficient=0.41&minAverageCoefficient=0.8&count=10
+GET https://localhost:7082/terrorists/search/?input=abdulkarimov mogamed usmanovich&minCoefficient=0.41&minAverageCoefficient=0.4&count=10
 Content-Type: text/plain
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
-<> 2024-04-19T105840.200.json
+<> 2024-04-25T021309.200.json
 
 ###
 
-GET http://localhost:5022/terrorists/search/?input=abdulkarimov mogamed usmanovich&minCoefficient=0.41&minAverageCoefficient=0.7&count=10
+GET https://localhost:7082/terrorists/search/?input=abdulkarimov mogamed usmanovich&minCoefficient=0.41&minAverageCoefficient=0.4&count=10
 Content-Type: text/plain
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
-<> 2024-04-19T105838.200.json
+<> 2024-04-25T021308.200.json
 
 ###
 
-GET http://localhost:5022/terrorists/search/?input=abdulkarimov mogamed usmanovich&minCoefficient=0.41&minAverageCoefficient=0.7&count=10
+GET https://localhost:7082/terrorists/search/?input=abdulkarimov mogamed usmanovich&minCoefficient=0.41&minAverageCoefficient=0.4&count=10
 Content-Type: text/plain
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
-<> 2024-04-19T105827.200.json
+<> 2024-04-25T021307.200.json
 
 ###
 
-GET http://localhost:5022/terrorists/search/?input=abdulkarimov mogamed usmanovich&minCoefficient=0.41&minAverageCoefficient=0.8&count=10
+GET https://localhost:7082/terrorists/search/?input=abdulkarimov mogamed usmanovich&minCoefficient=0.41&minAverageCoefficient=0.4&count=10
 Content-Type: text/plain
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
-<> 2024-04-19T105826.200.json
+<> 2024-04-25T021306.200.json
 
 ###
 
-GET http://localhost:5022/terrorists/search/?input=abdulkarimov mogamed usmanovich&minCoefficient=0.41&minAverageCoefficient=0.8&count=10
+GET https://localhost:7082/terrorists/search/?input=abdulkarimov mogamed usmanovich&minCoefficient=0.41&minAverageCoefficient=0.4&count=10
 Content-Type: text/plain
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
-<> 2024-04-19T105758.200.json
+<> 2024-04-25T021304.200.json
 
 ###
 
-GET http://localhost:5022/terrorists/search/?input=abdulkarimov mogamed usmanovich&minCoefficient=0.41&minAverageCoefficient=0.8&count=10
+GET https://localhost:7082/terrorists/search/?input=Abd al-Khaliq Badr al-Din Huthi&minCoefficient=0.41&minAverageCoefficient=0.4&count=10
 Content-Type: text/plain
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
-<> 2024-04-19T105756.200.json
+<> 2024-04-25T021257.200.json
 
 ###
 
-GET http://localhost:5022/terrorists/search/?input=abdulkarimov mogamed usmanovich&minCoefficient=0.41&minAverageCoefficient=0.8&count=10
+GET https://localhost:7082/terrorists/search/?input=Abd al-Khaliq Badr al-Din al-Huthi
 Content-Type: text/plain
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
-<> 2024-04-19T105747.200.json
+<> 2024-04-25T021254.200.json
 
 ###
 
-GET http://localhost:5022/terrorists/search/?input=abdulkarimov mogamed usmanovich&minCoefficient=0.41&minAverageCoefficient=0.8&count=10
+GET https://localhost:7082/terrorists/search/?input=Abd al-Khaliq Badr al-Din al-Huthi&yearOfBirth=1984
 Content-Type: text/plain
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
-<> 2024-04-19T105746.200.json
+<> 2024-04-25T021252.200.json
 
 ###
 
-GET http://localhost:5022/terrorists/search/?input=Abd al-Khaliq Badr al-Din al-Huthi&minCoefficient={{minCoefficient}}&minAverageCoefficient={{minAverageCoefficient}}&count={{count}}
+GET https://localhost:7082/terrorists/search/?input=Abd al-Khaliq Badr al-Din al-Huthi&yearOfBirth=1984
 Content-Type: text/plain
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
-<> 2024-04-19T105745.400.txt
+<> 2024-04-25T021251.200.json
 
 ###
 
-GET http://localhost:5022/terrorists/search/?input=Abd al-Khaliq Badr al-Din al-Huthi
+GET https://localhost:7082/terrorists/search/?input=Abd al-Khaliq Badr al-Din Huthi&yearOfBirth=1984
 Content-Type: text/plain
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
-<> 2024-04-19T105740.200.json
+<> 2024-04-25T021250.200.json
 
 ###
 
-GET http://localhost:5022/terrorists/search/?input=Abd al-Khaliq Badr al-Din al-Huthi
+GET https://localhost:7082/terrorists/search/?input=abdulkarimov mogamed usmanovich
 Content-Type: text/plain
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
-<> 2024-04-19T105739.200.json
+<> 2024-04-25T021247.200.json
 
 ###
 
-GET http://localhost:5022/terrorists/search/?input=Abd al-Khaliq Badr al-Din al-Huthi&yearOfBirth=1984
+GET https://localhost:7082/terrorists/search/?input=abdulkarimov mogamed usmanovich&minCoefficient=0.41&minAverageCoefficient=0.4&count=10
 Content-Type: text/plain
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
-<> 2024-04-19T105737.200.json
+<> 2024-04-25T021230.200.json
 
 ###
 
-GET http://localhost:5022/terrorists/search/?input=Abd al-Khaliq Badr al-Din al-Huthi&yearOfBirth=1984
+GET https://localhost:7082/terrorists/search/?input=ABDULKADIROVICH&minCoefficient=0.41&minAverageCoefficient=0.4&count=10
 Content-Type: text/plain
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
-<> 2024-04-19T105736.200.json
+<> 2024-04-25T021225.200.json
 
 ###
 
-GET http://localhost:5022/terrorists/search/?input=Abd al-Khaliq Badr al-Din al-Huthi&yearOfBirth={{yearOfBirth}}
+GET https://localhost:7082/terrorists/search/?input=ABDULKADIROVICH&minCoefficient=0.41&minAverageCoefficient=0.4&count=10
 Content-Type: text/plain
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
-<> 2024-04-19T105726.400.txt
+<> 2024-04-25T021201.200.json
 
 ###
 
-GET http://localhost:5022/terrorists/search/?input={{input}}
+GET https://localhost:7082/terrorists/search/?input=abdulkarimov mogamed ABDULKADIROVICH&minCoefficient=0.41&minAverageCoefficient=0.4&count=10
 Content-Type: text/plain
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
-<> 2024-04-19T105709.200.json
+<> 2024-04-25T021200.200.json
 
 ###
 
-GET http://localhost:5022/terrorists/search/?input=Abd al-Khaliq Badr al-Din al-Huthi
+GET https://localhost:7082/terrorists/search/?input=abdulkarimov mogamed ABDULKADIROVICH&minCoefficient=0.41&minAverageCoefficient=0.4&count=10
 Content-Type: text/plain
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
-<> 2024-04-18T190053.200.json
+<> 2024-04-25T021136.200.json
 
 ###
 
-GET http://localhost:5022/terrorists/search/?input=abdulkarimov mogamed usmanovich
+GET https://localhost:7082/terrorists/search/?input=abdulkarimov mogamed&minCoefficient=0.41&minAverageCoefficient=0.4&count=10
 Content-Type: text/plain
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
-<> 2024-04-18T190052.200.json
+<> 2024-04-25T021135.200.json
 
 ###
 
-GET http://localhost:5022/terrorists/search/?input=abdulkarimov mogamed usmanovich&minCoefficient=0.41&minAverageCoefficient=0.8&count=10
+GET https://localhost:7082/terrorists/search/?input=abdulkarimov mogamed&minCoefficient=0.41&minAverageCoefficient=0.4&count=10
 Content-Type: text/plain
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
-<> 2024-04-18T190047.200.json
+<> 2024-04-25T021039.200.json
 
 ###
 
-GET http://localhost:5022/terrorists/search/?input=abdulkarimov mogamed usmanovich&minCoefficient=0.41&minAverageCoefficient=0.8&count=10
+GET https://localhost:7082/terrorists/search/?input=abdulkarimov mogamed&minCoefficient=0.41&minAverageCoefficient=0.7&count=10
 Content-Type: text/plain
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
-<> 2024-04-18T185005.200.json
+<> 2024-04-25T021038.200.json
 
 ###
 
-GET http://localhost:5022/terrorists/search/?input=abdulkarimov mogamed usmanovich&minCoefficient=0.41&minAverageCoefficient=0.8&count=10
+GET https://localhost:7082/terrorists/search/?input=abdulkarimov mogamed&minCoefficient=0.41&minAverageCoefficient=0.7&count=10
 Content-Type: text/plain
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
-<> 2024-04-18T185004.200.json
+<> 2024-04-25T021031.200.json
 
 ###
 
-GET http://localhost:5022/terrorists/search/?input=Abd al-Khaliq Badr al-Din al-Huthi&minCoefficient=0.41&minAverageCoefficient=0.8&count=10
+GET https://localhost:7082/terrorists/search/?input=abdulkarimov mogamed&minCoefficient=0.41&minAverageCoefficient=0.7&count=10
 Content-Type: text/plain
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
-<> 2024-04-18T185000.200.json
+<> 2024-04-25T021029.200.json
 
 ###
 
-GET http://localhost:5022/terrorists/search/?input=Abd al-Khaliq Badr al-Din al-Huthi
+GET https://localhost:7082/terrorists/search/?input=abdulkarimov mogamed usmanovich&minCoefficient=0.41&minAverageCoefficient=0.7&count=10
 Content-Type: text/plain
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
-<> 2024-04-18T184957.200.json
+<> 2024-04-25T021028.200.json
 
 ###
 
-GET http://localhost:5022/terrorists/search/?input=Abd al-Khaliq Badr al-Din al-Huthi
+GET https://localhost:7082/terrorists/search/?input=abdulkarimov mogamed usmanovich&minCoefficient=0.41&minAverageCoefficient=0.7&count=10
 Content-Type: text/plain
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
-<> 2024-04-18T184955.200.json
+<> 2024-04-25T021015.200.json
 
 ###
 
-GET http://localhost:5022/terrorists/search/?input=Abd al-Khaliq Badr al-Din al-Huthi
+GET https://localhost:7082/terrorists/search/?input=abdulkarimov mogamed usmanovich&minCoefficient=0.41&minAverageCoefficient=0.7&count=10
 Content-Type: text/plain
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
-<> 2024-04-18T184953.200.json
+<> 2024-04-25T021010.200.json
 
 ###
 
-GET http://localhost:5022/terrorists/search/?input=Abd al-Khaliq Badr al-Din al-Huthi
+GET https://localhost:7082/terrorists/search/?input=Abd al-Khaliq Badr al-Din Huthi&minCoefficient=0.41&minAverageCoefficient=0.7&count=10
 Content-Type: text/plain
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
-<> 2024-04-18T184952.200.json
+<> 2024-04-24T221528.200.json
 
 ###
 
-GET http://localhost:5022/terrorists/search/?input=Abd al-Khaliq Badr al-Din al-Huthi&yearOfBirth=1984
+GET https://localhost:7082/terrorists/search/?input=abdulkarimov mogamed usmanovich
 Content-Type: text/plain
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
-<> 2024-04-18T184949.200.json
+<> 2024-04-24T221523.200.json
 
 ###
 
-GET http://localhost:5022/terrorists/search/?input=Abd al-Khaliq Badr al-Din al-Huthi&yearOfBirth=1984
+GET https://localhost:7082/terrorists/search/?input=Abd al-Khaliq Badr al-Din al-Huthi&minCoefficient=0.41&minAverageCoefficient=0.7&count=10
 Content-Type: text/plain
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
-<> 2024-04-18T184947-1.200.json
+<> 2024-04-24T221520.200.json
 
 ###
 
-GET http://localhost:5022/terrorists/search/?input=Abd al-Khaliq Badr al-Din al-Huthi&yearOfBirth=1984
+GET https://localhost:7082/terrorists/search/?input=Abd al-Khaliq Badr al-Din Huthi&yearOfBirth=1984
 Content-Type: text/plain
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
-<> 2024-04-18T184947.200.json
+<> 2024-04-24T221517.200.json
 
 ###
 
-GET http://localhost:5022/terrorists/search/?input=Abd al-Khaliq Badr al-Din al-Huthi&yearOfBirth=1984
+GET https://localhost:7082/terrorists/search/?input=abdulkarimov mogamed usmanovich
 Content-Type: text/plain
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
-<> 2024-04-18T184946.200.json
+<> 2024-04-24T221515.200.json
 
 ###
 
-GET http://localhost:5022/terrorists/search/?input=Abd al-Khaliq Badr al-Din al-Huthi&yearOfBirth=1984
+GET https://localhost:7082/terrorists/search/?input=Abd al-Khaliq Badr al-Din Huthi&minCoefficient=0.41&minAverageCoefficient=0.7&count=10
 Content-Type: text/plain
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
-<> 2024-04-18T184944.200.json
+<> 2024-04-24T221511.200.json
 
 ###
 
-GET http://localhost:5022/terrorists/search/?input=abdulkarimov mogamed usmanovich&yearOfBirth=1984
+GET https://localhost:7082/terrorists/search/?input=abdulkarimov mogamed usmanovich
 Content-Type: text/plain
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
-<> 2024-04-18T184943.200.json
+<> 2024-04-24T213800.200.json
 
 ###
 
-GET http://localhost:5022/terrorists/search/?input=abdulkarimov mogamed usmanovich&minCoefficient=0.41&minAverageCoefficient=0.8&count=10
+GET https://localhost:7082/terrorists/search/?input=Abd al-Khaliq Badr al-Din al-Huthi&minCoefficient=0.41&minAverageCoefficient=0.7&count=10
 Content-Type: text/plain
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
-<> 2024-04-18T184913.200.json
+<> 2024-04-24T213634.200.json
 
 ###
 
-GET http://localhost:5022/terrorists/search/?input=abdulkarimov mogamed usmanovich&minCoefficient=0.41&minAverageCoefficient=0.8&count=10
+GET https://localhost:7082/terrorists/search/?input=abdulkarimov mogamed usmanovich
 Content-Type: text/plain
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
-<> 2024-04-18T184911.200.json
+<> 2024-04-24T213625.200.json
 
 ###
 
-GET http://localhost:5022/terrorists/search/?input=abdulkarimov mogamed usmanovich&minCoefficient=0.41&minAverageCoefficient=0.8&count=10
+GET https://localhost:7082/terrorists/search/?input=Abd al-Khaliq Badr al-Din al-Huthi&minCoefficient=0.41&minAverageCoefficient=0.7&count=10
 Content-Type: text/plain
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
-<> 2024-04-18T184908.200.json
+<> 2024-04-24T213621.200.json
 
 ###
 
-GET http://localhost:5022/terrorists/search/?input=abdulkarimov mogamed usmanovich&minCoefficient=0.41&minAverageCoefficient=0.8&count=10
+GET https://localhost:7082/terrorists/search/?input=Abd al-Khaliq Badr al-Din al-Huthi&yearOfBirth=1984
 Content-Type: text/plain
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
-<> 2024-04-18T184635.200.json
+<> 2024-04-24T213617.200.json
 
 ###
 
-GET http://localhost:5022/terrorists/search/?input=Abd al-Khaliq Badr al-Din al-Huthi&minCoefficient=0.41&minAverageCoefficient=0.8&count=10
+GET https://localhost:7082/terrorists/search/?input=Abd al-Khaliq Badr al-Din al-Huthi&yearOfBirth=1984
 Content-Type: text/plain
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
-<> 2024-04-18T184632.200.json
+<> 2024-04-24T213616.200.json
 
 ###
 
-GET http://localhost:5022/terrorists/search/?input=Abd al-Khaliq Badr al-Din al-Huthi
+GET https://localhost:7082/terrorists/search/?input=abdulkarimov mogamed usmanovich
 Content-Type: text/plain
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
-<> 2024-04-18T184619.200.json
+<> 2024-04-24T213613.200.json
 
 ###
 
-GET http://localhost:5022/terrorists/search/?input=Abd al-Khaliq Badr al-Din al-Huthi
+GET https://localhost:7082/terrorists/search/?input=abdulkarimov mogamed usmanovich&minCoefficient=0.41&minAverageCoefficient=0.7&count=10
 Content-Type: text/plain
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
-<> 2024-04-18T184618.200.json
+<> 2024-04-24T213610.200.json
 
 ###
 
-GET http://localhost:5022/terrorists/search/?input=Abd al-Khaliq Badr al-Din al-Huthi&yearOfBirth=1984
+GET https://localhost:7082/terrorists/search/?input=Abd al-Khaliq Badr al-Din al-Huthi&minCoefficient=0.41&minAverageCoefficient=0.7&count=10
 Content-Type: text/plain
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
-<> 2024-04-18T184615.200.json
+<> 2024-04-24T213609.200.json
 
 ###
 
-GET http://localhost:5022/terrorists/search/?input=abdulkarimov mogamed usmanovich
+GET https://localhost:7082/terrorists/search/?input=Abd al-Khaliq Badr al-Din al-Huthi&yearOfBirth=1984
 Content-Type: text/plain
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
-<> 2024-04-18T184613.200.json
+<> 2024-04-24T213605.200.json
 
 ###
 
-GET http://localhost:5022/terrorists/search/?input=abdulkarimov mogamed usmanovich&minCoefficient=0.41&minAverageCoefficient=0.8&count=10
+GET https://localhost:7082/terrorists/search/?input=abdulkarimov mogamed usmanovich
 Content-Type: text/plain
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
-<> 2024-04-18T184609.200.json
+<> 2024-04-24T213603.200.json
 
 ###
 
-GET http://localhost:5022/terrorists/search/?input=abdulkarimov mogamed usmanovich&minCoefficient=0.41&minAverageCoefficient=0.8&count=10
+GET https://localhost:7082/terrorists/search/?input=Abd al-Khaliq Badr al-Din al-Huthi&minCoefficient=0.41&minAverageCoefficient=0.7&count=10
 Content-Type: text/plain
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
-<> 2024-04-18T181249.200.json
+<> 2024-04-24T213559.200.json
 
 ###
 
-GET http://localhost:5022/terrorists/search/?input=abdulkarimov mogamed usmanovich&minCoefficient=0.41&minAverageCoefficient=0.8&count=10
+GET https://localhost:7082/terrorists/search/?input=Abd al-Khaliq Badr al-Din al-Huthi&yearOfBirth=1984
 Content-Type: text/plain
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
-<> 2024-04-18T181231.200.json
+<> 2024-04-24T185455.200.json
 
 ###
 
-GET http://localhost:5022/terrorists/search/?input=abdulkarimov mogamed usmanovich&minCoefficient=0.41&minAverageCoefficient=0.8&count=10
+GET https://localhost:7082/terrorists/search/?input=abdulkarimov mogamed usmanovich
 Content-Type: text/plain
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
-<> 2024-04-18T181214.200.json
+<> 2024-04-24T185452.200.json
 
 ###
 

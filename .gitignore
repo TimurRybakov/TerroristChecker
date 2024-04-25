@@ -364,3 +364,5 @@ FodyWeavers.xsd
 
 # Idea cache directory
 .idea/
+
+TerroristChecker.Api/Logs/

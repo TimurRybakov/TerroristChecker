@@ -13,7 +13,7 @@ public sealed class UpdatePersonCacheCommand : ICommand;
 
 internal sealed class UpdatePersonCacheCommandHandler(
     IMediator mediator,
-    IPersonCacheService personCacheService) : ICommandHandler<UpdatePersonCacheCommand>
+    IPersonSearcherService personSearcherService) : ICommandHandler<UpdatePersonCacheCommand>
 {
     public async Task<Result> Handle(UpdatePersonCacheCommand request, CancellationToken cancellationToken)
     {
@@ -26,11 +26,11 @@ internal sealed class UpdatePersonCacheCommandHandler(
             return Result.Failure(TerroristErrors.NotAcquired);
         }
 
-        personCacheService.Clear();
+        personSearcherService.Clear();
 
         foreach (var person in terrorists.Value)
         {
-            personCacheService.Add(person.Id, person.FullName, person.Birthday);
+            personSearcherService.Add(person.Id, person.FullName, person.Birthday);
         }
 
         return Result.Success();

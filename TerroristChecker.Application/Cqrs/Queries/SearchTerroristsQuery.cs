@@ -9,15 +9,15 @@ public sealed record SearchTerroristsQuery(
     int? Count = null,
     SearchOptions? SearchOptions = null) : IQuery<IList<SearchTerroristResponse>>;
 
-internal sealed class SearchTerroristQueryHandler(IPersonCacheService personCacheService)
+internal sealed class SearchTerroristQueryHandler(IPersonSearcherService personSearcherService)
     : IQueryHandler<SearchTerroristsQuery, IList<SearchTerroristResponse>>
 {
     public async Task<Result<IList<SearchTerroristResponse>>> Handle(
         SearchTerroristsQuery request,
         CancellationToken cancellationToken)
     {
-        var results = await personCacheService.SearchAsync(
-            request.FullName, request.SearchOptions ?? SearchOptions.Default);
+        var results = await personSearcherService.SearchAsync(
+            request.FullName, request.SearchOptions ?? SearchOptions.Default, cancellationToken);
 
         if (results is null)
         {
@@ -27,10 +27,10 @@ internal sealed class SearchTerroristQueryHandler(IPersonCacheService personCach
         return results
             .Select(
                 x => new SearchTerroristResponse(
-                    x.Key.Id,
-                    nameFull: string.Join(" ", x.Key.Names),
-                    x.Key.Birthday,
-                    x.Value.AvgCoefficient))
+                    x.Person.Key.Id,
+                    nameFull: x.Person.Key.FullName,
+                    x.Person.Key.Birthday,
+                    x.AvgCoefficient))
             .Take(request.Count ?? 1)
             .ToList();
     }

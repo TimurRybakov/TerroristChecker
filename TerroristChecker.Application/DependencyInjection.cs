@@ -23,8 +23,8 @@ public static class DependencyInjection
 
         services.AddSingleton<IWordStorageService, WordStorageService>(
             serviceProvider => ActivatorUtilities.CreateInstance<WordStorageService>(serviceProvider, 80 * 3));
-        services.AddSingleton<IPersonCacheService, PersonCacheService>(
-            serviceProvider => ActivatorUtilities.CreateInstance<PersonCacheService>(serviceProvider, 80));
+        services.AddSingleton<IPersonSearcherService, PersonSearcherService>(
+            serviceProvider => ActivatorUtilities.CreateInstance<PersonSearcherService>(serviceProvider, 80));
 
         return services;
     }

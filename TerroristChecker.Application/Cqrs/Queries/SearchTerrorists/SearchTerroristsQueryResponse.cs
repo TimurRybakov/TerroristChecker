@@ -1,6 +1,6 @@
-﻿namespace TerroristChecker.Application.Cqrs.Queries;
+﻿namespace TerroristChecker.Application.Cqrs.Queries.SearchTerrorists;
 
-public sealed class SearchTerroristResponse
+public sealed class SearchTerroristsQueryResponse
 {
     public int? Id { get; init; }
     public string? NameFull { get; init; }
@@ -9,7 +9,7 @@ public sealed class SearchTerroristResponse
 
     public double? Coefficient { get; init; }
 
-    public SearchTerroristResponse(int id, string nameFull, DateOnly? birthday, double coefficient)
+    public SearchTerroristsQueryResponse(int id, string nameFull, DateOnly? birthday, double coefficient)
     {
         Id = id;
         NameFull = nameFull;
@@ -17,7 +17,7 @@ public sealed class SearchTerroristResponse
         Coefficient = coefficient;
     }
 
-    public SearchTerroristResponse()
+    public SearchTerroristsQueryResponse()
     {
 
     }

@@ -1,4 +1,5 @@
 using TerroristChecker.Domain.Dice.Abstractions;
+using TerroristChecker.Domain.Dice.Models;
 
 namespace TerroristChecker.Application.Dice.Services;
 
@@ -9,7 +10,7 @@ namespace TerroristChecker.Application.Dice.Services;
 /// <param name="wordSeparators">Symbols to separate words in a multiwords strings passed to ParseWords method.</param>
 public sealed class WordStorageService(int capacity, char[]? wordSeparators = null) : IWordStorageService
 {
-    private readonly HashSet<string> _words = new HashSet<string>(capacity);
+    private readonly HashSet<string> _words = new (capacity);
 
     private char[] WordSeparators { get; set; } = wordSeparators ?? [' ', '-'];
 
@@ -17,10 +18,33 @@ public sealed class WordStorageService(int capacity, char[]? wordSeparators = nu
     /// Returns array of words parsed from am input.
     /// </summary>
     /// <param name="words">Input string.</param>
+    /// <param name="prepareWord">Word prepare function.</param>
     /// <returns>Array where each element is a single not unique word.</returns>
-    public string[] ParseWords(string words)
+    public WordModel[] ParseWords(string words, Func<string, string> prepareWord)
     {
-        return words.Split(WordSeparators, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+        var wordsArray = words.Split(WordSeparators, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+
+        if (wordsArray.Length > byte.MaxValue)
+        {
+            throw new ArithmeticException(
+                $"Number of words ({words.Length}) in fullName exceeded maximum allowed number of {byte.MaxValue}");
+        }
+
+        var results = wordsArray
+            .Select((unpreparedWord, i) => (Value: prepareWord(unpreparedWord), Index: i ))
+            .GroupBy(word => word.Value, StringComparer.InvariantCultureIgnoreCase)
+            .SelectMany(sameWords =>
+                sameWords.Select((preparedWord, index) => new WordModel(
+                    Value: preparedWord.Value,
+                    Index: (byte)preparedWord.Index,
+                    SameCount: (byte)(sameWords.Count()),
+                    SameIndex: (byte)(index + 1)
+                ))
+            )
+            .OrderBy(w => w.Index)
+            .ToArray();
+
+        return results;
     }
 
     /// <summary>
@@ -28,7 +52,7 @@ public sealed class WordStorageService(int capacity, char[]? wordSeparators = nu
     /// </summary>
     /// <param name="word">The word to compare with.</param>
     /// <returns>Matched word from storage.</returns>
-    public string? Get(string word)
+    public string? TryGet(string word)
     {
         return _words.TryGetValue(word, out var value) ? value : null;
     }
@@ -40,7 +64,7 @@ public sealed class WordStorageService(int capacity, char[]? wordSeparators = nu
     /// <returns>Matched or added word from storage</returns>
     public string GetOrAdd(string word)
     {
-        var value = Get(word);
+        var value = TryGet(word);
 
         if (value is not null)
         {

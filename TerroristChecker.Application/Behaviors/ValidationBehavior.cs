@@ -7,9 +7,8 @@ using TerroristChecker.Application.Errors;
 
 namespace TerroristChecker.Application.Behaviors;
 
-public class ValidationBehavior<TRequest, TResponse>
-    : IPipelineBehavior<TRequest, TResponse>
-    where TRequest : IBaseCommand
+public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+    where TRequest : notnull
 {
     private readonly IEnumerable<IValidator<TRequest>> _validators;
 
@@ -30,16 +29,19 @@ public class ValidationBehavior<TRequest, TResponse>
 
         var context = new ValidationContext<TRequest>(request);
 
-        var validationErrors = _validators
-            .Select(validator => validator.Validate(context))
-            .Where(validationResult => validationResult.Errors.Any())
+        var validationFailures = await Task.WhenAll(
+            _validators.Select(validator => validator.ValidateAsync(context, cancellationToken)));
+
+        var validationErrors = validationFailures
+            .Where(validationResult => !validationResult.IsValid)
             .SelectMany(validationResult => validationResult.Errors)
-            .Select(validationFailure => new ValidationError(
-                validationFailure.PropertyName,
-                validationFailure.ErrorMessage))
+            .Select(
+                validationFailure => new ValidationError(
+                    validationFailure.PropertyName,
+                    validationFailure.ErrorMessage))
             .ToList();
 
-        if (validationErrors.Any())
+        if (validationErrors.Count > 0)
         {
             throw new Exceptions.ValidationException(validationErrors);
         }

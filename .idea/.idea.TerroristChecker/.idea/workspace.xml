@@ -9,158 +9,62 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f903c380-26d2-49ab-9973-fac313d5058e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/TerroristChecker.Application/Dice/Services/PersonSearcherService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TerroristChecker.Domain/Dice/Models/NameSearchResultModel.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TerroristChecker.Domain/Dice/Models/NamesSearchResultModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerroristChecker/.idea/httpRequests/2024-04-18T181214.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerroristChecker/.idea/httpRequests/2024-04-18T181231.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerroristChecker/.idea/httpRequests/2024-04-18T181249.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerroristChecker/.idea/httpRequests/2024-04-18T184609.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerroristChecker/.idea/httpRequests/2024-04-18T184613.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerroristChecker/.idea/httpRequests/2024-04-18T184615.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerroristChecker/.idea/httpRequests/2024-04-18T184618.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerroristChecker/.idea/httpRequests/2024-04-18T184619.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerroristChecker/.idea/httpRequests/2024-04-18T184632.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerroristChecker/.idea/httpRequests/2024-04-18T184635.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerroristChecker/.idea/httpRequests/2024-04-18T184908.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerroristChecker/.idea/httpRequests/2024-04-18T184911.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerroristChecker/.idea/httpRequests/2024-04-18T184913.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerroristChecker/.idea/httpRequests/2024-04-18T184943.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerroristChecker/.idea/httpRequests/2024-04-18T184944.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerroristChecker/.idea/httpRequests/2024-04-18T184946.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerroristChecker/.idea/httpRequests/2024-04-18T184947-1.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerroristChecker/.idea/httpRequests/2024-04-18T184947.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerroristChecker/.idea/httpRequests/2024-04-18T184949.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerroristChecker/.idea/httpRequests/2024-04-18T184952.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerroristChecker/.idea/httpRequests/2024-04-18T184953.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerroristChecker/.idea/httpRequests/2024-04-18T184955.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerroristChecker/.idea/httpRequests/2024-04-18T184957.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerroristChecker/.idea/httpRequests/2024-04-18T185000.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerroristChecker/.idea/httpRequests/2024-04-18T185004.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerroristChecker/.idea/httpRequests/2024-04-18T185005.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerroristChecker/.idea/httpRequests/2024-04-18T190047.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerroristChecker/.idea/httpRequests/2024-04-18T190052.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerroristChecker/.idea/httpRequests/2024-04-18T190053.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerroristChecker/.idea/httpRequests/2024-04-19T105709.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerroristChecker/.idea/httpRequests/2024-04-19T105726.400.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerroristChecker/.idea/httpRequests/2024-04-19T105736.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerroristChecker/.idea/httpRequests/2024-04-19T105737.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerroristChecker/.idea/httpRequests/2024-04-19T105739.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerroristChecker/.idea/httpRequests/2024-04-19T105740.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerroristChecker/.idea/httpRequests/2024-04-19T105745.400.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerroristChecker/.idea/httpRequests/2024-04-19T105746.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerroristChecker/.idea/httpRequests/2024-04-19T105747.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerroristChecker/.idea/httpRequests/2024-04-19T105756.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerroristChecker/.idea/httpRequests/2024-04-19T105758.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerroristChecker/.idea/httpRequests/2024-04-19T105826.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerroristChecker/.idea/httpRequests/2024-04-19T105827.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerroristChecker/.idea/httpRequests/2024-04-19T105838.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerroristChecker/.idea/httpRequests/2024-04-19T105840.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerroristChecker/.idea/httpRequests/2024-04-19T105847.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerroristChecker/.idea/httpRequests/2024-04-19T105848.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerroristChecker/.idea/httpRequests/2024-04-20T005055.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerroristChecker/.idea/httpRequests/2024-04-20T005109.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerroristChecker/.idea/httpRequests/2024-04-20T005114.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerroristChecker/.idea/httpRequests/2024-04-20T005121.200.json" beforeDir="false" />
+    <list default="true" id="f903c380-26d2-49ab-9973-fac313d5058e" name="Changes" comment="Parallel word search, average coefficient calculations fixes, optimizations">
+      <change afterPath="$PROJECT_DIR$/TerroristChecker.Api/HttpRequests/SearchWithCustomParams.http" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TerroristChecker.Api/HttpRequests/SimpleSearch.http" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TerroristChecker.Api/Middleware/ExceptionHandlingMiddleware.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TerroristChecker.Application/Cqrs/Queries/SearchTerrorists/SearchTerroristsQueryValidator.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TerroristChecker.Domain/Dice/Models/WordModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TerroristChecker/.idea/httpRequests/http-requests-log.http" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TerroristChecker/.idea/httpRequests/http-requests-log.http" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TerroristChecker/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TerroristChecker/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TerroristChecker.Api/TerroristChecker.Api.http" beforeDir="false" afterPath="$PROJECT_DIR$/TerroristChecker.Api/TerroristChecker.Api.http" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TerroristChecker.Application/Cqrs/Commands/UpdatePersonCacheCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TerroristChecker.Application/Cqrs/Commands/UpdatePersonCacheCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TerroristChecker.Application/Cqrs/Queries/SearchTerroristsQuery.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TerroristChecker.Application/Cqrs/Queries/SearchTerroristsQuery.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TerroristChecker.Api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TerroristChecker.Api/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TerroristChecker.Api/TerroristChecker.Api.http" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TerroristChecker.Application.IntegrationTests/Dice/GetTerroristsTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TerroristChecker.Application.IntegrationTests/Dice/GetTerroristsTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TerroristChecker.Application.IntegrationTests/Dice/SearchTerroristsTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TerroristChecker.Application.IntegrationTests/Dice/SearchTerroristsTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TerroristChecker.Application/Behaviors/ValidationBehavior.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TerroristChecker.Application/Behaviors/ValidationBehavior.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TerroristChecker.Application/Cqrs/Commands/UpdatePersonCacheCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TerroristChecker.Application/Cqrs/Commands/UpdatePersonCache/UpdatePersonCacheCommand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TerroristChecker.Application/Cqrs/Queries/GetTerroristsQuery.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TerroristChecker.Application/Cqrs/Queries/GetTerrorists/GetTerroristsQuery.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TerroristChecker.Application/Cqrs/Queries/SearchTerroristResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TerroristChecker.Application/Cqrs/Queries/SearchTerrorists/SearchTerroristsQueryResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TerroristChecker.Application/Cqrs/Queries/SearchTerroristsQuery.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TerroristChecker.Application/Cqrs/Queries/SearchTerrorists/SearchTerroristsQuery.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TerroristChecker.Application/DependencyInjection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TerroristChecker.Application/DependencyInjection.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TerroristChecker.Application/Dice/Services/PersonCacheService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TerroristChecker.Domain/Dice/Abstractions/IPersonCacheService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TerroristChecker.Domain/Dice/Abstractions/IPersonSearcherService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TerroristChecker.Domain/Dice/Models/PersonModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TerroristChecker.Domain/Dice/Models/PersonModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TerroristChecker.Domain/Dice/Models/PersonNameModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TerroristChecker.Domain/Dice/Models/PersonNameModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TerroristChecker.Domain/Dice/Models/SearchResultModel.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TerroristChecker.Domain/TerroristErrors.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TerroristChecker.Domain/TerroristErrors.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TerroristChecker.Application/Dice/NgramIndex.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TerroristChecker.Application/Dice/NgramIndex.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TerroristChecker.Application/Dice/Services/PersonSearcherService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TerroristChecker.Application/Dice/Services/PersonSearcherService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TerroristChecker.Application/Dice/Services/WordStorageService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TerroristChecker.Application/Dice/Services/WordStorageService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TerroristChecker.Application/TerroristChecker.Application.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/TerroristChecker.Application/TerroristChecker.Application.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TerroristChecker.Domain/Dice/Abstractions/IWordStorageService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TerroristChecker.Domain/Dice/Abstractions/IWordStorageService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TerroristChecker.Domain/Dice/Abstractions/SearchOptions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TerroristChecker.Domain/Dice/Abstractions/SearchOptions.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTTP Request" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/aspnetcore/88ec3bc3f37e76fbcc932a25f9f0c1c29fe2b343/src/Mvc/Mvc.Testing/src/WebApplicationFactory.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/aspnetcore/8e941eb42f819adb116b881195158b3887a70a1c/src/DefaultBuilder/src/WebApplication.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/aspnetcore/8e941eb42f819adb116b881195158b3887a70a1c/src/Http/Http.Abstractions/src/ProblemDetails/ProblemDetails.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/aspnetcore/8e941eb42f819adb116b881195158b3887a70a1c/src/Middleware/HttpsPolicy/src/HttpsRedirectionBuilderExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/efcore/c2f996919858eb11d2836705d47b531b5a174c79/src/EFCore/DbContext.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/efcore/c2f996919858eb11d2836705d47b531b5a174c79/src/EFCore/DbSet.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/efcore/c2f996919858eb11d2836705d47b531b5a174c79/src/EFCore/Extensions/EntityFrameworkQueryableExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/runtime/5535e31a712343a63f5d7d796cd874e563e5ac14/src/libraries/Microsoft.Extensions.Configuration/src/ConfigurationBuilder.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/runtime/5535e31a712343a63f5d7d796cd874e563e5ac14/src/libraries/Microsoft.Extensions.DependencyInjection.Abstractions/src/ServiceProviderServiceExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/runtime/bf5e279d9239bfef5bb1b8d6212f1b971c434606/src/coreclr/System.Private.CoreLib/src/System/Reflection/RuntimeAssembly.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/runtime/bf5e279d9239bfef5bb1b8d6212f1b971c434606/src/coreclr/System.Private.CoreLib/src/System/Runtime/CompilerServices/RuntimeHelpers.CoreCLR.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/runtime/bf5e279d9239bfef5bb1b8d6212f1b971c434606/src/coreclr/System.Private.CoreLib/src/System/Type.CoreCLR.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/runtime/bf5e279d9239bfef5bb1b8d6212f1b971c434606/src/libraries/Common/src/System/Collections/Generic/BitHelper.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/runtime/bf5e279d9239bfef5bb1b8d6212f1b971c434606/src/libraries/System.Collections.Concurrent/src/System/Collections/Concurrent/ConcurrentDictionary.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/runtime/bf5e279d9239bfef5bb1b8d6212f1b971c434606/src/libraries/System.Linq/src/System/Linq/AnyAll.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/runtime/bf5e279d9239bfef5bb1b8d6212f1b971c434606/src/libraries/System.Linq/src/System/Linq/Count.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/runtime/bf5e279d9239bfef5bb1b8d6212f1b971c434606/src/libraries/System.Linq/src/System/Linq/First.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/runtime/bf5e279d9239bfef5bb1b8d6212f1b971c434606/src/libraries/System.Linq/src/System/Linq/Grouping.cs" root0="SKIP_HIGHLIGHTING" />
@@ -172,6 +76,7 @@
     <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/runtime/bf5e279d9239bfef5bb1b8d6212f1b971c434606/src/libraries/System.Linq/src/System/Linq/Take.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/runtime/bf5e279d9239bfef5bb1b8d6212f1b971c434606/src/libraries/System.Linq/src/System/Linq/ToCollection.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/runtime/bf5e279d9239bfef5bb1b8d6212f1b971c434606/src/libraries/System.Private.CoreLib/src/System/Array.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/runtime/bf5e279d9239bfef5bb1b8d6212f1b971c434606/src/libraries/System.Private.CoreLib/src/System/Collections/Generic/CollectionExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/runtime/bf5e279d9239bfef5bb1b8d6212f1b971c434606/src/libraries/System.Private.CoreLib/src/System/Collections/Generic/Dictionary.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/runtime/bf5e279d9239bfef5bb1b8d6212f1b971c434606/src/libraries/System.Private.CoreLib/src/System/Collections/Generic/HashSet.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/runtime/bf5e279d9239bfef5bb1b8d6212f1b971c434606/src/libraries/System.Private.CoreLib/src/System/Collections/Generic/KeyValuePair.cs" root0="SKIP_HIGHLIGHTING" />
@@ -182,8 +87,10 @@
     <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/runtime/bf5e279d9239bfef5bb1b8d6212f1b971c434606/src/libraries/System.Private.CoreLib/src/System/Runtime/CompilerServices/AsyncMethodBuilderCore.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/runtime/bf5e279d9239bfef5bb1b8d6212f1b971c434606/src/libraries/System.Private.CoreLib/src/System/Runtime/CompilerServices/AsyncValueTaskMethodBuilder.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/runtime/bf5e279d9239bfef5bb1b8d6212f1b971c434606/src/libraries/System.Private.CoreLib/src/System/Runtime/InteropServices/CollectionsMarshal.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/runtime/bf5e279d9239bfef5bb1b8d6212f1b971c434606/src/libraries/System.Private.CoreLib/src/System/RuntimeType.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/runtime/bf5e279d9239bfef5bb1b8d6212f1b971c434606/src/libraries/System.Private.CoreLib/src/System/Span.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/runtime/bf5e279d9239bfef5bb1b8d6212f1b971c434606/src/libraries/System.Private.CoreLib/src/System/String.Comparison.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/runtime/bf5e279d9239bfef5bb1b8d6212f1b971c434606/src/libraries/System.Private.CoreLib/src/System/String.Manipulation.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/runtime/bf5e279d9239bfef5bb1b8d6212f1b971c434606/src/libraries/System.Private.CoreLib/src/System/String.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/runtime/bf5e279d9239bfef5bb1b8d6212f1b971c434606/src/libraries/System.Private.CoreLib/src/System/StringComparer.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/runtime/bf5e279d9239bfef5bb1b8d6212f1b971c434606/src/libraries/System.Private.CoreLib/src/System/Threading/CancellationTokenSource.cs" root0="SKIP_HIGHLIGHTING" />
@@ -201,13 +108,17 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/768ffd8826aa497fb5b91d2a59f785af4e910/be/08089dc1/IApplicationBuilder.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/f8c859fa67af41f8bd90fc15f4f9c01c95c0/a8/2d367a9b/Program.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/12f8d680aa1c5ae78dc1fb7cf8212be01e323372dbe3b9b87360e27c58936a/IRequest.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/1419ed4112a5f67e99e1dec32aef5592bcdecca3da27dba832c32e1b0ca14/ServiceCollectionExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/34ff4a0f713e2bf2792a68c17f16e627d9162c3133b95be749eb257ac4f778/AbstractValidator.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/51a4f462d6eeaacc1d74f4f4f378be1b654df14c1d9cbe88b2434648aee0c946/AbstractValidator.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/568413f66017f13fbdab2d05a1fd1db4d8f8491172a5b81a318d88ca96d5a/TestCaseAttribute.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/78c860a4a0696d27b2942ef6996b8ceec84aec6b56a4221bd8ce81cc42954d/RequestHandlerWrapper.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/8aca45508683a6169bab9e8bd96b7cda607d638cacfaa31173c8c278c45/ISender.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b2d015aef913cff5d5f16a2d476f19e1f336d02f373a7eb6a5439ecb2ec8bd3/AssemblyScanner.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b60386338a8235576eb5171c2bd3549113ab45319cda39ad1c281e85776ff6e/MediatrServiceConfiguration.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/c765e47ec58cf89220cd5779fc5cce70b01abab88edf4ed2b5deaba1244c610/IValidator.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/e7268004cea411c815a7ab3cb4144fbb696c52cfe11670e8ab0d8b26fa24/ServiceCollectionExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f4bc324a395d24ed12db75b0a81536b642509aa14825bf114d9b7c934e2b/Mediator.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/t.rybakov/source/repos/TerroristsChecker/TerroristChecker.Application/Dice/Services/PersonCacheService.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="HttpClientSelectedEnvironments">
     <file url="jar://$APPLICATION_HOME_DIR$/plugins/restClient/lib/restClient.jar!/com/intellij/ws/rest/client/requests/collection/get-requests.http" environment="test" />
@@ -233,6 +144,11 @@
     ".NET Launch Settings Profile.TerroristChecker.Api: https.executor": "Debug",
     "1a4b508a-0e2f-4a4a-bd6d-1388dd123b14.executor": "Debug",
     "HTTP Request.All in TerroristChecker.Api.executor": "Run",
+    "HTTP Request.CustomParams | #1.executor": "Run",
+    "HTTP Request.SearchWithCustomParams | #1.executor": "Run",
+    "HTTP Request.SimpleSearch | #1.executor": "Run",
+    "HTTP Request.SimpleSearch | #2.executor": "Run",
+    "HTTP Request.TerroristChecker.Api | #1 (1).executor": "Run",
     "HTTP Request.TerroristChecker.Api | #1.executor": "Run",
     "HTTP Request.TerroristChecker.Api | #2.executor": "Run",
     "HTTP Request.TerroristChecker.Api | #3.executor": "Run",
@@ -257,19 +173,13 @@
   }
 }]]></component>
   <component name="RunManager" selected=".NET Launch Settings Profile.TerroristChecker.Api: https">
-    <configuration name="All in TerroristChecker.Api" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" path="$PROJECT_DIR$/TerroristChecker.Api/TerroristChecker.Api.http">
+    <configuration name="SearchWithCustomParams | #1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/TerroristChecker.Api/HttpRequests/SearchWithCustomParams.http" requestIdentifier="#1" runType="Run single request">
       <method v="2" />
     </configuration>
-    <configuration name="TerroristChecker.Api | #1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/TerroristChecker.Api/TerroristChecker.Api.http" requestIdentifier="#1" runType="Run single request">
+    <configuration name="SimpleSearch | #1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/TerroristChecker.Api/HttpRequests/SimpleSearch.http" requestIdentifier="#1" runType="Run single request">
       <method v="2" />
     </configuration>
-    <configuration name="TerroristChecker.Api | #2" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/TerroristChecker.Api/TerroristChecker.Api.http" index="2" requestIdentifier="#2" runType="Run single request">
-      <method v="2" />
-    </configuration>
-    <configuration name="TerroristChecker.Api | #3" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/TerroristChecker.Api/TerroristChecker.Api.http" index="3" requestIdentifier="#3" runType="Run single request">
-      <method v="2" />
-    </configuration>
-    <configuration name="requests-with-tests | Composing scripts with imports" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="jar://$APPLICATION_HOME_DIR$/plugins/restClient/lib/restClient.jar!/com/intellij/ws/rest/client/requests/collection/requests-with-tests.http" index="8" requestIdentifier="Composing scripts with imports" runType="Run single request">
+    <configuration name="SimpleSearch | #2" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/TerroristChecker.Api/HttpRequests/SimpleSearch.http" index="2" requestIdentifier="#2" runType="Run single request">
       <method v="2" />
     </configuration>
     <configuration name="TerroristChecker.Api: IIS Express" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
@@ -317,13 +227,19 @@
         <option name="Build" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue=".NET Launch Settings Profile.TerroristChecker.Api: http" />
+      <item itemvalue=".NET Launch Settings Profile.TerroristChecker.Api: https" />
+      <item itemvalue=".NET Launch Settings Profile.TerroristChecker.Api: IIS Express" />
+      <item itemvalue="HTTP Request.SearchWithCustomParams | #1" />
+      <item itemvalue="HTTP Request.SimpleSearch | #1" />
+      <item itemvalue="HTTP Request.SimpleSearch | #2" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="HTTP Request.TerroristChecker.Api | #2" />
-        <item itemvalue="HTTP Request.TerroristChecker.Api | #3" />
-        <item itemvalue="HTTP Request.TerroristChecker.Api | #1" />
-        <item itemvalue="HTTP Request.All in TerroristChecker.Api" />
-        <item itemvalue="HTTP Request.requests-with-tests | Composing scripts with imports" />
+        <item itemvalue="HTTP Request.SearchWithCustomParams | #1" />
+        <item itemvalue="HTTP Request.SimpleSearch | #1" />
+        <item itemvalue="HTTP Request.SimpleSearch | #2" />
       </list>
     </recent_temporary>
   </component>
@@ -341,8 +257,21 @@
       <workItem from="1713249751224" duration="46532000" />
       <workItem from="1713509523054" duration="30639000" />
       <workItem from="1713768191528" duration="24367000" />
-      <workItem from="1713943835122" duration="52304000" />
+      <workItem from="1713943835122" duration="59908000" />
+      <workItem from="1714113536751" duration="599000" />
+      <workItem from="1714200683147" duration="12240000" />
+      <workItem from="1714632803720" duration="16259000" />
+      <workItem from="1714720874744" duration="10484000" />
     </task>
+    <task id="LOCAL-00001" summary="Parallel word search, average coefficient calculations fixes, optimizations">
+      <option name="closed" value="true" />
+      <created>1714061367732</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1714061367732</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -362,6 +291,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value="Parallel word search, average coefficient calculations fixes, optimizations" />
+    <option name="LAST_COMMIT_MESSAGE" value="Parallel word search, average coefficient calculations fixes, optimizations" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

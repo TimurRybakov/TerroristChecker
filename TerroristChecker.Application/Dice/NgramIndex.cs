@@ -129,7 +129,7 @@ internal sealed class NgramIndex<TIndexKey, TIndexValue>(int capacity)
         {
             foreach (var kvp in result)
             {
-                if (kvp.Value.Coefficient < minCoefficient || kvp.Value.Matches < N - 1)
+                if (kvp.Value.Coefficient < minCoefficient)
                 {
                     result.Remove(kvp.Key);
                 }
@@ -139,7 +139,7 @@ internal sealed class NgramIndex<TIndexKey, TIndexValue>(int capacity)
         return result;
     }
 
-    public string GetPreparedInput(string input)
+    public string PrepareWord(string input)
     {
         var n = N;
 

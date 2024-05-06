@@ -1,6 +1,7 @@
 using FluentAssertions;
 
 using TerroristChecker.Application.Cqrs.Queries;
+using TerroristChecker.Application.Cqrs.Queries.GetTerrorists;
 
 namespace TerroristsChecker.Application.IntegrationTests.Dice;
 

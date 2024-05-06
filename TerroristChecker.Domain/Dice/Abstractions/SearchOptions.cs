@@ -2,7 +2,12 @@
 
 public sealed class SearchOptions
 {
-    public SearchOptions(DateOnly? birthday, int? yearOfBirth, double? minCoefficient, double? minAverageCoefficient)
+    public SearchOptions(
+        DateOnly? birthday,
+        int? yearOfBirth,
+        double? minCoefficient,
+        double? minAverageCoefficient,
+        bool? averageByInputCount)
     {
         Birthday = birthday;
         YearOfBirth = yearOfBirth;
@@ -12,6 +17,9 @@ public sealed class SearchOptions
 
         if (minAverageCoefficient is not null)
             MinAverageCoefficient = (double)minAverageCoefficient;
+
+        if (averageByInputCount is not null)
+            AverageByInputCount = (bool)averageByInputCount;
     }
 
     public SearchOptions()
@@ -25,7 +33,14 @@ public sealed class SearchOptions
 
     public double MinCoefficient { get; init; } = 0.41;
 
-    public double MinAverageCoefficient { get; init; } = 0.80;
+    public double MinAverageCoefficient { get; init; } = 0.75;
 
     public static readonly SearchOptions Default = new ();
+
+
+    /// <summary>
+    /// If true counts max average coefficient only by input word count. If person name contains more words than in input
+    /// it wont affect the average value.
+    /// </summary>
+    public bool AverageByInputCount { get; set; } = true;
 }

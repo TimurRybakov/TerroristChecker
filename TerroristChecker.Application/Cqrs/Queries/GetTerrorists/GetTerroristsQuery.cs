@@ -2,7 +2,7 @@
 using TerroristChecker.Domain.Abstractions;
 using TerroristChecker.Domain.Dice.Entities;
 
-namespace TerroristChecker.Application.Cqrs.Queries;
+namespace TerroristChecker.Application.Cqrs.Queries.GetTerrorists;
 
 public sealed record GetTerroristsQuery : IQuery<List<Person>>;
 

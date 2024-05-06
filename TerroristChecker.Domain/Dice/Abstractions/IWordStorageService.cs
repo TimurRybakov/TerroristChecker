@@ -1,8 +1,10 @@
-﻿namespace TerroristChecker.Domain.Dice.Abstractions;
+﻿using TerroristChecker.Domain.Dice.Models;
+
+namespace TerroristChecker.Domain.Dice.Abstractions;
 
 public interface IWordStorageService
 {
-    string[] ParseWords(string words);
+    WordModel[] ParseWords(string words, Func<string, string> prepareWord);
 
     string GetOrAdd(string word);
 

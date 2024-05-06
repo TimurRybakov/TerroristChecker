@@ -1,6 +1,7 @@
 using FluentAssertions;
 
 using TerroristChecker.Application.Cqrs.Queries;
+using TerroristChecker.Application.Cqrs.Queries.SearchTerrorists;
 
 namespace TerroristsChecker.Application.IntegrationTests.Dice;
 
@@ -11,8 +12,8 @@ public class SearchTerroristsTests
     [Test]
     [TestCase("Abd al-Khaliq Badr al-Din al-Huthi", 2)]
     [TestCase("abdulkarimov mogamed usmanovich", 2)]
-    [TestCase("Abd al-Khaliq Badr al-Din al-Huthi notmatched", 0)]
-    [TestCase("abdulkarimov mogamed usmanovich notmatched", 0)]
+    [TestCase("Abd al-Khaliq Badr al-Din al-Huthi al", 0)]
+    [TestCase("abdulkarimov mogamed usmanovich mogamed", 0)]
     public async Task SearchTerroristsQuery_ShouldReturnValidResults(string fullName, int expectedResultsCount)
     {
         // Arrange

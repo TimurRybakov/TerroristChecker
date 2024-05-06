@@ -2,17 +2,17 @@
 using TerroristChecker.Domain.Abstractions;
 using TerroristChecker.Domain.Dice.Abstractions;
 
-namespace TerroristChecker.Application.Cqrs.Queries;
+namespace TerroristChecker.Application.Cqrs.Queries.SearchTerrorists;
 
 public sealed record SearchTerroristsQuery(
     string FullName,
     int? Count = null,
-    SearchOptions? SearchOptions = null) : IQuery<IList<SearchTerroristResponse>>;
+    SearchOptions? SearchOptions = null) : IQuery<IList<SearchTerroristsQueryResponse>>;
 
 internal sealed class SearchTerroristQueryHandler(IPersonSearcherService personSearcherService)
-    : IQueryHandler<SearchTerroristsQuery, IList<SearchTerroristResponse>>
+    : IQueryHandler<SearchTerroristsQuery, IList<SearchTerroristsQueryResponse>>
 {
-    public async Task<Result<IList<SearchTerroristResponse>>> Handle(
+    public async Task<Result<IList<SearchTerroristsQueryResponse>>> Handle(
         SearchTerroristsQuery request,
         CancellationToken cancellationToken)
     {
@@ -21,12 +21,12 @@ internal sealed class SearchTerroristQueryHandler(IPersonSearcherService personS
 
         if (results is null)
         {
-            return new List<SearchTerroristResponse>();
+            return new List<SearchTerroristsQueryResponse>();
         }
 
         return results
             .Select(
-                x => new SearchTerroristResponse(
+                x => new SearchTerroristsQueryResponse(
                     x.Person.Key.Id,
                     nameFull: x.Person.Key.FullName,
                     x.Person.Key.Birthday,

@@ -21,39 +21,21 @@ public sealed class PersonSearcherService(
 
     public void Add(int id, string fullName, DateOnly? birthday)
     {
-        var words = wordStorageService.ParseWords(fullName);
+        var words = wordStorageService.ParseWords(
+            fullName, w => wordStorageService.GetOrAdd(_index.PrepareWord(w)));
 
         if (words is [])
         {
             return;
         }
 
-        if (words.Length > byte.MaxValue)
-        {
-            throw new ArithmeticException(
-                $"Number of words ({words.Length}) in fullName exceeded maximum allowed number of {byte.MaxValue}");
-        }
-
         var person = new PersonModel(id, new PersonNameModel[words.Length], fullName, birthday);
 
-        var prepares = words
-            .Select((x, i) => new { PreparedWord = wordStorageService.GetOrAdd(_index.GetPreparedInput(x)), Index = i })
-            .GroupBy(x => x.PreparedWord, StringComparer.InvariantCultureIgnoreCase)
-            .SelectMany(group =>
-                group.Select((word, index) => new
-                {
-                    Word = word.PreparedWord,
-                    Index = (byte)word.Index,
-                    SameCount = (byte)(group.Count()),
-                    SameIndex = (byte)(index + 1)
-                })
-            );
-
-        foreach (var prepared in prepares)
+        foreach (var word in words)
         {
-            var personName = new PersonNameModel(person, prepared.Index, prepared.Word, prepared.SameIndex, prepared.SameCount);
-            person.Names[prepared.Index] = personName;
-            _index.Add(prepared.Word, personName, person);
+            var personName = new PersonNameModel(person, word.Index, word.Value, word.SameIndex, word.SameCount);
+            person.Names[word.Index] = personName;
+            _index.Add(word.Value, personName, person);
         }
     }
 
@@ -72,7 +54,7 @@ public sealed class PersonSearcherService(
         (KeyValuePair<PersonModel,NamesSearchResultModel> Person, double AvgCoefficient)[]? orderedResults = null;
         try
         {
-            var inputWords = wordStorageService.ParseWords(input);
+            var inputWords = wordStorageService.ParseWords(input, w => _index.PrepareWord(w));
             if (inputWords.Length == 0)
             {
                 return null;
@@ -98,8 +80,7 @@ public sealed class PersonSearcherService(
                         }
 
                         var word = inputWords[inputWordIndex];
-                        var preparedWord = _index.GetPreparedInput(word);
-                        var result = SearchPersonsByWord(preparedWord, (byte)inputWordIndex, searchOptionsInternal);
+                        var result = SearchPersonsByWord(word, inputWords.Length, searchOptionsInternal);
 
                         results[inputWordIndex] = result.Persons;
 
@@ -121,14 +102,9 @@ public sealed class PersonSearcherService(
 
             cancellationToken.ThrowIfCancellationRequested();
 
-            var result = IntersectMany(results);
+            var result = IntersectMany(inputWords, results);
 
-            orderedResults = result
-                .Select(x =>
-                    (Person: x, AvgCoefficient: x.Value.Names.Average(name => name.Value.Coefficient)))
-                .Where(x => x.AvgCoefficient >= searchOptionsInternal.MinAverageCoefficient)
-                .OrderByDescending(x => x.AvgCoefficient)
-                .ToArray();
+            orderedResults = FilterAvgCoefficientAndOrderResults(inputWords, result, searchOptionsInternal);
 
             if (logger.IsEnabled(LogLevel.Debug) && orderedResults?.Length > 0)
             {
@@ -151,10 +127,33 @@ public sealed class PersonSearcherService(
         }
     }
 
+    private static (KeyValuePair<PersonModel, NamesSearchResultModel> Person, double AvgCoefficient)[]
+        FilterAvgCoefficientAndOrderResults(
+            WordModel[] inputWords,
+            Dictionary<PersonModel, NamesSearchResultModel> result,
+            SearchOptions searchOptions)
+    {
+        return result.Select(x =>
+            {
+                var avgCoefficient = searchOptions.AverageByInputCount
+                    ? x.Value.Names
+                        .OrderByDescending(y => y.Value.Coefficient)
+                        .Take(inputWords.Length)
+                        .Average(name => name.Value.Coefficient)
+                    : x.Value.Names
+                        .Average(name => name.Value.Coefficient);
+
+                return (Person: x, AvgCoefficient: avgCoefficient);
+            })
+            .Where(x => x.AvgCoefficient >= searchOptions.MinAverageCoefficient)
+            .OrderByDescending(x => x.AvgCoefficient)
+            .ToArray();
+    }
+
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private (bool Continue, Dictionary<PersonModel, NameSearchResultModel> Persons) SearchPersonsByWord(
-        string inputWord,
-        byte inputWordIndex,
+        WordModel inputWord,
+        int inputWordsCount,
         SearchOptions searchOptions)
     {
         var birthday = searchOptions.Birthday;
@@ -162,22 +161,25 @@ public sealed class PersonSearcherService(
 
         // Get person names matching input word
         var personNames = _index.GetMatches(
-            inputWord, searchOptions.MinCoefficient,
-            (_, person) => (birthday is null && (yearOfBirth is null || yearOfBirth == person.Birthday?.Year)) ||
-                           Nullable.Equals(birthday, person.Birthday));
+            inputWord.Value,
+            searchOptions.MinCoefficient,
+            (_, person) => (
+                (birthday is null && (yearOfBirth is null || yearOfBirth == person.Birthday?.Year))
+                || Nullable.Equals(birthday, person.Birthday)
+                ) && person.Names.Length >= inputWordsCount);
 
         if (personNames.Count == 0)
             return (Continue: false, Persons: new Dictionary<PersonModel, NameSearchResultModel>());
 
         // Convert person names dictionary to persons
-        var persons = GroupNamesToPersons(personNames, inputWordIndex);
+        var persons = GroupNamesToPersons(personNames, inputWord);
 
         return (Continue: persons.Count != 0, Persons: persons);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static Dictionary<PersonModel, NameSearchResultModel> GroupNamesToPersons(
-        Dictionary<PersonNameModel, NgramSearchResultModel> results, byte inputWordIndex)
+        Dictionary<PersonNameModel, NgramSearchResultModel> results, WordModel inputWord)
     {
         var groupedResults = results
             .GroupBy(
@@ -190,7 +192,7 @@ public sealed class PersonSearcherService(
                         kvp => kvp.Key,
                         kvp => new NameSearchResultValueModel(
                             //Count: group.Key.Names.Count(names => string.Equals(names.Name, kvp.Key.Name)),
-                            inputWordIndex,
+                            inputWord.Index,
                             kvp.Value.Coefficient))
                 ),
                 PersonModelComparer.Instance
@@ -200,6 +202,7 @@ public sealed class PersonSearcherService(
     }
 
     private static Dictionary<PersonModel, NamesSearchResultModel> IntersectMany(
+        WordModel[] inputWords,
         params Dictionary<PersonModel, NameSearchResultModel>[] arrayOfMatches)
     {
         if (arrayOfMatches.Length == 0)
@@ -210,7 +213,8 @@ public sealed class PersonSearcherService(
         Dictionary<PersonModel, NamesSearchResultModel> intersectedDictionary =
             new(arrayOfMatches.Min(x => x.Count), PersonModelComparer.Instance);
 
-        foreach (var (person, searchResult) in arrayOfMatches[0])
+        // Iterate through each person to search for intersections
+        foreach (var (person, _) in arrayOfMatches[0])
         {
             // Check if person match intersects through all results
             if (!PersonExistsInAllMatches(person, arrayOfMatches))
@@ -218,7 +222,8 @@ public sealed class PersonSearcherService(
                 continue;
             }
 
-            var namesSearchResult = CreateNamesSearchResult(arrayOfMatches, person);
+            // Create results algorithm
+            var namesSearchResult = CreateNamesSearchResult(inputWords, person, arrayOfMatches);
 
             // Add combined result to intersectedDictionary
             if (namesSearchResult.Names.Count > 0)
@@ -231,37 +236,53 @@ public sealed class PersonSearcherService(
     }
 
     private static NamesSearchResultModel CreateNamesSearchResult(
-        Dictionary<PersonModel, NameSearchResultModel>[] arrayOfMatches,
-        PersonModel person)
+        WordModel[] inputWords,
+        PersonModel person,
+        Dictionary<PersonModel, NameSearchResultModel>[] arrayOfMatches)
     {
         var namesDictionary = new Dictionary<PersonNameModel, NamesSearchResultValueModel>(PersonNameModelComparer.Instance);
         var namesSearchResult = new NamesSearchResultModel(Names: namesDictionary);
+        var inputNameMatches = new Dictionary<int, double>[person.Names.Length];
+        var severalInputsForOnePersonName = false;
 
-        // Add matches from other words
+        // Iterate through ALL persons names (not only matched by index)
         foreach (var name in person.Names)
         {
-            var inputNameMatches = new HashSet<int>(10);
+            inputNameMatches[name.WordIndex] = new Dictionary<int, double>(10);
+            var inputNameMatch = inputNameMatches[name.WordIndex];
 
             foreach (var match in arrayOfMatches)
             {
-                var otherSearchResult = match[person];
+                var searchResult = match[person];
 
-                if (otherSearchResult.Names.TryGetValue(name, out var nameSearchResultValue))
+                // Search person name
+                if (searchResult.Names.TryGetValue(name, out var nameSearchResultValue))
                 {
-                    inputNameMatches.Add(nameSearchResultValue.InputWordIndex);
-
-                    if (inputNameMatches.Count > name.SameCount)
+                    // Number of same words in input exceeds same name count in person names - not a match!
+                    if (inputWords[nameSearchResultValue.InputWordIndex].SameCount > name.SameCount)
                     {
                         namesDictionary.Clear();
                         return namesSearchResult;
                     }
 
-                    ref var val = ref CollectionsMarshal.GetValueRefOrAddDefault(
-                        namesDictionary, name, out var valExists);
+                    inputNameMatch.Add(nameSearchResultValue.InputWordIndex, nameSearchResultValue.Coefficient);
 
-                    if (!valExists)
+                    if (!severalInputsForOnePersonName)
                     {
-                        val.Coefficient = nameSearchResultValue.Coefficient;
+                        // This condition changes the algorithm (several inputs matched one person name)
+                        if (inputNameMatch.Count > name.SameCount)
+                        {
+                            severalInputsForOnePersonName = true;
+                            continue;
+                        }
+
+                        ref var val = ref CollectionsMarshal.GetValueRefOrAddDefault(
+                            namesDictionary, name, out var valExists);
+
+                        if (!valExists)
+                        {
+                            val.Coefficient = nameSearchResultValue.Coefficient;
+                        }
                     }
                 }
             }
@@ -271,9 +292,25 @@ public sealed class PersonSearcherService(
 
             if (valueExists)
             {
-                if (inputNameMatches.Count == 0 || name.SameIndex > inputNameMatches.Count)
+                if (inputNameMatch.Count == 0 || name.SameIndex > inputNameMatch.Count)
                 {
                     value.Coefficient = 0;
+                }
+            }
+        }
+
+        if (severalInputsForOnePersonName)
+        {
+            var bestMatch = EvaluateBestMatch(inputNameMatches);
+
+            foreach (var name in person.Names)
+            {
+                ref var val = ref CollectionsMarshal.GetValueRefOrAddDefault(
+                    namesDictionary, name, out var valExists);
+
+                if (bestMatch.TryGetValue(name.WordIndex, out var bestMatchValue))
+                {
+                    val.Coefficient = bestMatchValue;
                 }
             }
         }
@@ -281,13 +318,81 @@ public sealed class PersonSearcherService(
         return namesSearchResult;
     }
 
+    /// <summary>
+    /// Evaluation based om dynamic programming principle to find match with maximum average coefficient
+    /// </summary>
+    /// <param name="coefficients"></param>
+    /// <returns></returns>
+    private static Dictionary<int, double> EvaluateBestMatch(Dictionary<int, double>[] coefficients)
+    {
+        int n = coefficients.Length;
+        int m = coefficients.Max(x => x.Count);
+
+        double[,] dp = new double[n, m];
+        int[,] path = new int[n, m];
+
+        for (int i = 0; i < m; i++)
+        {
+            dp[0, i] = coefficients[0].GetValueOrDefault(i, 0);
+        }
+
+        for (int i = 1; i < n; i++)
+        {
+            for (int j = 0; j < m; j++)
+            {
+                dp[i, j] = 0;
+                path[i, j] = 0;
+
+                if (!coefficients[i].ContainsKey(j))
+                    continue;
+
+                for (int k = 0; k < m; k++)
+                {
+                    double maxCoefficientLocal = dp[i - 1, k] + coefficients[i][j];
+
+                    if (maxCoefficientLocal > dp[i, j])
+                    {
+                        dp[i, j] = maxCoefficientLocal;
+                        path[i, j] = k;
+                    }
+                }
+            }
+        }
+
+        double maxCoefficient = dp[n - 1, 0];
+        int lastIndex = 0;
+
+        for (int i = 1; i < m; i++)
+        {
+            if (dp[n - 1, i] > maxCoefficient)
+            {
+                maxCoefficient = dp[n - 1, i];
+                lastIndex = i;
+            }
+        }
+
+        var maxCoefficients = new Dictionary<int, double>();
+        for (int i = n - 1, j = lastIndex; i >= 0; i--)
+        {
+            if (coefficients[i].TryGetValue(j, out var value))
+            {
+                maxCoefficients.Add(i, value);
+            }
+
+            j = path[i, j];
+        }
+
+        return maxCoefficients;
+    }
+
     private static bool PersonExistsInAllMatches(
         PersonModel person,
-        IEnumerable<Dictionary<PersonModel, NameSearchResultModel>> arrayOfMatches)
+        Dictionary<PersonModel, NameSearchResultModel>[] arrayOfMatches)
     {
         var personExistsInAllMatches = true;
-        foreach (var persons in arrayOfMatches)
+        for (var index = 1; index < arrayOfMatches.Length; index++)
         {
+            var persons = arrayOfMatches[index];
             if (!persons.ContainsKey(person))
             {
                 personExistsInAllMatches = false;

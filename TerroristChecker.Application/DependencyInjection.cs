@@ -1,10 +1,12 @@
-﻿using MediatR;
+﻿using FluentValidation;
+
+using MediatR;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
 using TerroristChecker.Application.Behaviors;
-using TerroristChecker.Application.Cqrs.Commands;
+using TerroristChecker.Application.Cqrs.Commands.UpdatePersonCache;
 using TerroristChecker.Application.Dice.Services;
 using TerroristChecker.Domain.Dice.Abstractions;
 
@@ -20,6 +22,8 @@ public static class DependencyInjection
             configuration.AddOpenBehavior(typeof(LoggingBehavior<,>));
             configuration.AddOpenBehavior(typeof(ValidationBehavior<,>));
         });
+
+        services.AddValidatorsFromAssembly(typeof(DependencyInjection).Assembly, includeInternalTypes: true);
 
         services.AddSingleton<IWordStorageService, WordStorageService>(
             serviceProvider => ActivatorUtilities.CreateInstance<WordStorageService>(serviceProvider, 80 * 3));

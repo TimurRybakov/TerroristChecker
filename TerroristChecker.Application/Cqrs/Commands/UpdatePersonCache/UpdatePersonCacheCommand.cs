@@ -1,13 +1,12 @@
 ﻿using MediatR;
 
 using TerroristChecker.Application.Abstractions;
-using TerroristChecker.Application.Cqrs.Queries;
-using TerroristChecker.Application.Dice.Services;
+using TerroristChecker.Application.Cqrs.Queries.GetTerrorists;
 using TerroristChecker.Domain;
 using TerroristChecker.Domain.Abstractions;
 using TerroristChecker.Domain.Dice.Abstractions;
 
-namespace TerroristChecker.Application.Cqrs.Commands;
+namespace TerroristChecker.Application.Cqrs.Commands.UpdatePersonCache;
 
 public sealed class UpdatePersonCacheCommand : ICommand;
 

@@ -2,7 +2,7 @@
 
 using TerroristChecker.Domain.Abstractions;
 
-namespace TerroristChecker.Application.Abstractions;
+namespace TerroristChecker.Application.Abstractions.Cqrs;
 
 public interface ICommandHandler<in TCommand> : IRequestHandler<TCommand, Result>
     where TCommand : ICommand

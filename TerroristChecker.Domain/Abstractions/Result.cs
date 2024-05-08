@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using System.Text.Json.Serialization;
 
 namespace TerroristChecker.Domain.Abstractions;
 
@@ -42,6 +43,7 @@ public class Result<TValue> : Result
 {
     private readonly TValue? _value;
 
+    [JsonConstructor]
     protected internal Result(TValue? value, bool isSuccess, Error error)
         : base(isSuccess, error)
     {

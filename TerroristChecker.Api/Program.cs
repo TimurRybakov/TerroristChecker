@@ -6,11 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 
 using TerroristChecker.Api.Middleware;
 using TerroristChecker.Application;
-using TerroristChecker.Application.Cqrs.Queries;
 using TerroristChecker.Application.Cqrs.Queries.GetTerrorists;
 using TerroristChecker.Application.Cqrs.Queries.SearchTerrorists;
 using TerroristChecker.Domain.Dice.Abstractions;
 using TerroristChecker.Persistence;
+using TerroristChecker.InfrastructureServices;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog((context, configuration) => configuration.ReadFrom.Configuration(context.Configuration));
@@ -20,6 +20,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddApplication();
 builder.Services.AddPersistence(builder.Configuration);
+builder.Services.AddCaching(builder.Configuration, builder.Environment.IsDevelopment());
 
 var app = builder.Build();
 

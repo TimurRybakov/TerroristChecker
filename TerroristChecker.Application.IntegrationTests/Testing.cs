@@ -1,12 +1,10 @@
-﻿using FluentAssertions.Common;
-
-using MediatR;
+﻿using MediatR;
 
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
 
 using TerroristChecker.Api;
-using TerroristChecker.Application.Abstractions;
+using TerroristChecker.Application.Abstractions.Cqrs;
 using TerroristChecker.Domain.Abstractions;
 using TerroristChecker.Persistence;
 

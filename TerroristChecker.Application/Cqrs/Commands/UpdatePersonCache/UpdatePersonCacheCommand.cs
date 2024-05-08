@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-using TerroristChecker.Application.Abstractions;
+using TerroristChecker.Application.Abstractions.Cqrs;
 using TerroristChecker.Application.Cqrs.Queries.GetTerrorists;
 using TerroristChecker.Domain;
 using TerroristChecker.Domain.Abstractions;

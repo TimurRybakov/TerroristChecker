@@ -1,22 +1,20 @@
-﻿using MediatR;
+﻿using System.Diagnostics;
+using System.Globalization;
+
+using Humanizer;
+
+using MediatR;
 
 using Microsoft.Extensions.Logging;
 
 using TerroristChecker.Application.Abstractions;
+using TerroristChecker.Application.Abstractions.Cqrs;
 
 namespace TerroristChecker.Application.Behaviors;
 
-public class LoggingBehavior<TRequest, TResponse>
-    : IPipelineBehavior<TRequest, TResponse>
-    where TRequest : IBaseCommand
+internal sealed class LoggingBehavior<TRequest, TResponse>(ILogger<TRequest> logger) : IPipelineBehavior<TRequest, TResponse>
+    where TRequest : ICommandOrQuery
 {
-    private readonly ILogger<TRequest> _logger;
-
-    public LoggingBehavior(ILogger<TRequest> logger)
-    {
-        _logger = logger;
-    }
-
     public async Task<TResponse> Handle(
         TRequest request,
         RequestHandlerDelegate<TResponse> next,
@@ -26,17 +24,36 @@ public class LoggingBehavior<TRequest, TResponse>
 
         try
         {
-            _logger.LogTrace("Executing command {Command}", name);
+            logger.LogInformation("Executing command or query {Command}", name);
+
+            var process = Process.GetCurrentProcess();
+            var stopWatch = new Stopwatch();
+
+            var startTime = DateTime.UtcNow;
+            var startCpuUsage = process.TotalProcessorTime;
+
+            stopWatch.Start();
 
             var result = await next();
 
-            _logger.LogTrace("Command {Command} processed successfully", name);
+            stopWatch.Stop();
+
+            var endTime = DateTime.UtcNow;
+            var endCpuUsage = process.TotalProcessorTime;
+
+            var cpuUsedMs = (endCpuUsage - startCpuUsage).TotalMilliseconds;
+            var totalMsPassed = (endTime - startTime).TotalMilliseconds;
+            var cpuUsageTotal = cpuUsedMs / (Environment.ProcessorCount * totalMsPassed);
+
+            var cpuUsagePercentage = Math.Round(cpuUsageTotal * 100, 4);
+
+            logger.LogInformation("Command or query {Command} processed successfully (CPU: {CPU}%, {Elapsed})", name, cpuUsagePercentage, stopWatch.Elapsed.Humanize(culture: CultureInfo.InvariantCulture));
 
             return result;
         }
         catch (Exception exception)
         {
-            _logger.LogError(exception, "Command {Command} processing failed", name);
+            logger.LogError(exception, "Command or query {Command} processing failed", name);
 
             throw;
         }

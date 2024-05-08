@@ -1,4 +1,5 @@
-﻿using TerroristChecker.Application.Abstractions;
+﻿using TerroristChecker.Application.Abstractions.Cache;
+using TerroristChecker.Application.Abstractions.Cqrs;
 using TerroristChecker.Domain.Abstractions;
 using TerroristChecker.Domain.Dice.Abstractions;
 
@@ -7,12 +8,15 @@ namespace TerroristChecker.Application.Cqrs.Queries.SearchTerrorists;
 public sealed record SearchTerroristsQuery(
     string FullName,
     int? Count = null,
-    SearchOptions? SearchOptions = null) : IQuery<IList<SearchTerroristsQueryResponse>>;
+    SearchOptions? SearchOptions = null) : ICachedQuery<List<SearchTerroristsQueryResponse>>
+{
+    public TimeSpan? Expiration { get; } = TimeSpan.FromMinutes(15);
+}
 
 internal sealed class SearchTerroristQueryHandler(IPersonSearcherService personSearcherService)
-    : IQueryHandler<SearchTerroristsQuery, IList<SearchTerroristsQueryResponse>>
+    : IQueryHandler<SearchTerroristsQuery, List<SearchTerroristsQueryResponse>>
 {
-    public async Task<Result<IList<SearchTerroristsQueryResponse>>> Handle(
+    public async Task<Result<List<SearchTerroristsQueryResponse>>> Handle(
         SearchTerroristsQuery request,
         CancellationToken cancellationToken)
     {

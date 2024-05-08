@@ -1,4 +1,4 @@
-﻿using TerroristChecker.Application.Abstractions;
+﻿using TerroristChecker.Application.Abstractions.Cqrs;
 using TerroristChecker.Domain.Abstractions;
 using TerroristChecker.Domain.Dice.Entities;
 

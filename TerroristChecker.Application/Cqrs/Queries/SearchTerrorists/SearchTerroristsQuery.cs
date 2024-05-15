@@ -2,6 +2,7 @@
 using TerroristChecker.Application.Abstractions.Cqrs;
 using TerroristChecker.Domain.Abstractions;
 using TerroristChecker.Domain.Dice.Abstractions;
+using TerroristChecker.Domain.Dice.Models;
 
 namespace TerroristChecker.Application.Cqrs.Queries.SearchTerrorists;
 
@@ -16,19 +17,16 @@ public sealed record SearchTerroristsQuery(
 internal sealed class SearchTerroristQueryHandler(IPersonSearcherService personSearcherService)
     : IQueryHandler<SearchTerroristsQuery, List<SearchTerroristsQueryResponse>>
 {
-    public async Task<Result<List<SearchTerroristsQueryResponse>>> Handle(
+    public Task<Result<List<SearchTerroristsQueryResponse>>> Handle(
         SearchTerroristsQuery request,
         CancellationToken cancellationToken)
     {
-        var results = await personSearcherService.SearchAsync(
-            request.FullName, request.SearchOptions ?? SearchOptions.Default, cancellationToken);
+        var results = personSearcherService.Search(
+            request.FullName, request.SearchOptions ?? SearchOptions.Default);
 
-        if (results is null)
-        {
-            return new List<SearchTerroristsQueryResponse>();
-        }
-
-        return results
+        Result<List<SearchTerroristsQueryResponse>> result = results is null
+            ? new List<SearchTerroristsQueryResponse>()
+            : results
             .Select(
                 x => new SearchTerroristsQueryResponse(
                     x.Person.Key.Id,
@@ -37,5 +35,7 @@ internal sealed class SearchTerroristQueryHandler(IPersonSearcherService personS
                     x.AvgCoefficient))
             .Take(request.Count ?? 1)
             .ToList();
+
+        return Task.FromResult(result);
     }
 }

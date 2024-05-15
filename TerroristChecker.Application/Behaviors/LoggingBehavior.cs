@@ -47,7 +47,9 @@ internal sealed class LoggingBehavior<TRequest, TResponse>(ILogger<TRequest> log
 
             var cpuUsagePercentage = Math.Round(cpuUsageTotal * 100, 4);
 
-            logger.LogInformation("Command or query {Command} processed successfully (CPU: {CPU}%, {Elapsed})", name, cpuUsagePercentage, stopWatch.Elapsed.Humanize(culture: CultureInfo.InvariantCulture));
+            logger.LogInformation(
+                "Command or query {Command} processed successfully (CPU: {CPU}%, {Elapsed})",
+                name, cpuUsagePercentage, stopWatch.Elapsed.Humanize(culture: CultureInfo.InvariantCulture));
 
             return result;
         }

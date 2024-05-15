@@ -20,7 +20,7 @@ public static class DependencyInjection
         else
         {
             string connectionString = configuration.GetConnectionString("Cache") ??
-                                      throw new ArgumentNullException(nameof(configuration));
+                                      throw new Exception("Cache connection string is not defined in configuration file");
             services.AddStackExchangeRedisCache(options => options.Configuration = connectionString);
         }
 

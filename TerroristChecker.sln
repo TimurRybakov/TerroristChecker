@@ -22,6 +22,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TerroristChecker.Applicatio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TerroristChecker.InfrastructureServices", "TerroristChecker.InfrastructureServices\TerroristChecker.InfrastructureServices.csproj", "{BD528BF7-8578-479B-A716-CF15B89383C4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TerroristChecker.Application.UnitTests", "TerroristChecker.Application.UnitTests\TerroristChecker.Application.UnitTests.csproj", "{18C5502B-4FBF-44FF-AA92-1EBBC452B6BA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -52,10 +54,17 @@ Global
 		{DFCFB038-2EFC-47AD-9F60-3DE0C3EBD89E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DFCFB038-2EFC-47AD-9F60-3DE0C3EBD89E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DFCFB038-2EFC-47AD-9F60-3DE0C3EBD89E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFCFB038-2EFC-47AD-9F60-3DE0C3EBD89E}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{BD528BF7-8578-479B-A716-CF15B89383C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BD528BF7-8578-479B-A716-CF15B89383C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD528BF7-8578-479B-A716-CF15B89383C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD528BF7-8578-479B-A716-CF15B89383C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD528BF7-8578-479B-A716-CF15B89383C4}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{18C5502B-4FBF-44FF-AA92-1EBBC452B6BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18C5502B-4FBF-44FF-AA92-1EBBC452B6BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18C5502B-4FBF-44FF-AA92-1EBBC452B6BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18C5502B-4FBF-44FF-AA92-1EBBC452B6BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18C5502B-4FBF-44FF-AA92-1EBBC452B6BA}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{CC9D880E-FB2E-4069-88B7-8506F480B81F} = {084C9887-9468-4AD5-9060-2292EEBE65D6}
@@ -67,5 +76,6 @@ Global
 		{2D0081DE-5FEE-43F5-92FA-A4810E462740} = {3DF13C0B-DE9B-4A8C-B4FA-DA6A1839351D}
 		{DFCFB038-2EFC-47AD-9F60-3DE0C3EBD89E} = {603979E9-A5A2-41EE-ABCD-311503D70E3D}
 		{BD528BF7-8578-479B-A716-CF15B89383C4} = {05B562C0-847B-427E-8FEB-75D7D8726772}
+		{18C5502B-4FBF-44FF-AA92-1EBBC452B6BA} = {603979E9-A5A2-41EE-ABCD-311503D70E3D}
 	EndGlobalSection
 EndGlobal

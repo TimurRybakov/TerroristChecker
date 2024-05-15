@@ -31,16 +31,7 @@ public sealed class WordStorageService(int capacity, char[]? wordSeparators = nu
         }
 
         var results = wordsArray
-            .Select((unpreparedWord, i) => (Value: prepareWord(unpreparedWord), Index: i ))
-            .GroupBy(word => word.Value, StringComparer.InvariantCultureIgnoreCase)
-            .SelectMany(sameWords =>
-                sameWords.Select((preparedWord, index) => new WordModel(
-                    Value: preparedWord.Value,
-                    Index: (byte)preparedWord.Index,
-                    SameCount: (byte)(sameWords.Count()),
-                    SameIndex: (byte)(index + 1)
-                ))
-            )
+            .Select((unpreparedWord, i) => new WordModel(Value: prepareWord(unpreparedWord), Index: (byte)i ))
             .OrderBy(w => w.Index)
             .ToArray();
 

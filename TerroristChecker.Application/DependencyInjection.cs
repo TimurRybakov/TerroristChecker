@@ -3,6 +3,7 @@
 using MediatR;
 
 using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 using TerroristChecker.Application.Behaviors;
@@ -14,15 +15,19 @@ namespace TerroristChecker.Application;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddApplication(this IServiceCollection services)
+    public static IServiceCollection AddApplication(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddMediatR(configuration =>
-        {
-            configuration.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly);
-            configuration.AddOpenBehavior(typeof(LoggingBehavior<,>));
-            configuration.AddOpenBehavior(typeof(ValidationBehavior<,>));
-            configuration.AddOpenBehavior(typeof(QueryCachingBehavior<,>));
-        });
+        services.AddMediatR(
+            serviceConfiguration =>
+            {
+                serviceConfiguration.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly);
+                serviceConfiguration.AddOpenBehavior(typeof(LoggingBehavior<,>));
+                serviceConfiguration.AddOpenBehavior(typeof(ValidationBehavior<,>));
+                if (configuration.GetValue<bool>("Cache:Query"))
+                {
+                    serviceConfiguration.AddOpenBehavior(typeof(QueryCachingBehavior<,>));
+                }
+            });
 
         services.AddValidatorsFromAssembly(typeof(DependencyInjection).Assembly, includeInternalTypes: true);
 

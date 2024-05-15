@@ -8,6 +8,6 @@ public interface IPersonSearcherService
 
     void Clear();
 
-    Task<(KeyValuePair<PersonModel,NamesSearchResultModel> Person, double AvgCoefficient)[]?> SearchAsync(
-        string input, SearchOptions? searchOptions, CancellationToken cancellationToken);
+    (KeyValuePair<PersonModel,NamesSearchResultModel> Person, double AvgCoefficient)[]? Search(
+        string input, SearchOptions? searchOptions);
 }

@@ -1,11 +1,15 @@
+using System.Collections.Concurrent;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 using Microsoft.Extensions.Logging;
 
 using TerroristChecker.Application.Dice.Models;
+using TerroristChecker.Application.Tools;
 using TerroristChecker.Domain.Dice.Abstractions;
 using TerroristChecker.Domain.Dice.Models;
+
+[assembly: InternalsVisibleTo("TerroristChecker.Application.UnitTests")]
 
 namespace TerroristChecker.Application.Dice.Services;
 
@@ -33,7 +37,7 @@ public sealed class PersonSearcherService(
 
         foreach (var word in words)
         {
-            var personName = new PersonNameModel(person, word.Index, word.Value, word.SameIndex, word.SameCount);
+            var personName = new PersonNameModel(person, word.Index, word.Value);
             person.Names[word.Index] = personName;
             _index.Add(word.Value, personName, person);
         }
@@ -45,10 +49,9 @@ public sealed class PersonSearcherService(
         _index.Clear();
     }
 
-    public async Task<(KeyValuePair<PersonModel,NamesSearchResultModel> Person, double AvgCoefficient)[]?> SearchAsync(
+    public (KeyValuePair<PersonModel,NamesSearchResultModel> Person, double AvgCoefficient)[]? Search(
         string input,
-        SearchOptions? searchOptions = null,
-        CancellationToken cancellationToken = default)
+        SearchOptions? searchOptions = null)
     {
         logger.LogDebug("Input string: {Input}", input);
         (KeyValuePair<PersonModel,NamesSearchResultModel> Person, double AvgCoefficient)[]? orderedResults = null;
@@ -61,48 +64,46 @@ public sealed class PersonSearcherService(
             }
 
             var searchOptionsInternal = searchOptions ?? SearchOptions.Default;
-            Dictionary<PersonModel, NameSearchResultModel>[] results =
+            Dictionary<PersonModel, NameSearchResultModel>[] inputWordsMatches =
                 new Dictionary<PersonModel, NameSearchResultModel>[inputWords.Length];
-            CancellationTokenSource cts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+            var stopped = false;
             ParallelOptions options = new()
             {
-                MaxDegreeOfParallelism = Environment.ProcessorCount, CancellationToken = cts.Token
+                MaxDegreeOfParallelism = Environment.ProcessorCount
             };
 
-            try
+            // for (int inputWordIndex = 0; inputWordIndex < inputWords.Length; inputWordIndex++)
+            // {
+            //     var word = inputWords[inputWordIndex];
+            //     var inputWordMatch = SearchPersonsByWord(word, inputWords.Length, searchOptionsInternal);
+            //
+            //     inputWordsMatches[inputWordIndex] = inputWordMatch.Persons;
+            // }
+            Parallel.For(0, inputWords.Length, options, (inputWordIndex, state) =>
             {
-                await Parallel.ForAsync(
-                    0, inputWords.Length, options, async (inputWordIndex, ct) =>
-                    {
-                        if (ct.IsCancellationRequested)
-                        {
-                            return;
-                        }
+                if (state.IsStopped)
+                {
+                    return;
+                }
 
-                        var word = inputWords[inputWordIndex];
-                        var result = SearchPersonsByWord(word, inputWords.Length, searchOptionsInternal);
+                var word = inputWords[inputWordIndex];
+                var inputWordMatch = SearchPersonsByWord(word, inputWords.Length, searchOptionsInternal);
 
-                        results[inputWordIndex] = result.Persons;
+                inputWordsMatches[inputWordIndex] = inputWordMatch.Persons;
 
-                        if (!result.Continue || result.Persons.Count == 0)
-                        {
-                            await cts.CancelAsync();
-                        }
-                    });
-            }
-            catch (TaskCanceledException)
+                if (!inputWordMatch.Continue || inputWordMatch.Persons.Count == 0)
+                {
+                    stopped = true;
+                    state.Stop();
+                }
+            });
+
+            if (stopped)
             {
                 return null;
             }
 
-            if (cts.Token.IsCancellationRequested)
-            {
-                return null;
-            }
-
-            cancellationToken.ThrowIfCancellationRequested();
-
-            var result = IntersectMany(inputWords, results);
+            var result = IntersectMany(inputWords, searchOptionsInternal, inputWordsMatches);
 
             orderedResults = FilterAvgCoefficientAndOrderResults(inputWords, result, searchOptionsInternal);
 
@@ -203,47 +204,91 @@ public sealed class PersonSearcherService(
 
     private static Dictionary<PersonModel, NamesSearchResultModel> IntersectMany(
         WordModel[] inputWords,
-        params Dictionary<PersonModel, NameSearchResultModel>[] arrayOfMatches)
+        SearchOptions searchOptions,
+        params Dictionary<PersonModel, NameSearchResultModel>[] inputWordsMatches)
     {
-        if (arrayOfMatches.Length == 0)
+        if (inputWordsMatches.Length == 0)
         {
             return new Dictionary<PersonModel, NamesSearchResultModel>(PersonModelComparer.Instance);
         }
 
+        // Optimization: better start from smallest result
+        inputWordsMatches = MoveSmallestResultFirst(inputWordsMatches);
+
         Dictionary<PersonModel, NamesSearchResultModel> intersectedDictionary =
-            new(arrayOfMatches.Min(x => x.Count), PersonModelComparer.Instance);
+            new(inputWordsMatches[0].Count, PersonModelComparer.Instance);
 
-        // Iterate through each person to search for intersections
-        foreach (var (person, _) in arrayOfMatches[0])
+        const int chunkSize = 100;
+        Parallel.ForEach(
+            inputWordsMatches[0]
+                .Chunk(chunkSize), chunk =>
+            {
+                // Iterate through each person to search for intersections
+                foreach (var (person, _) in chunk)
+                {
+                    // If person has fewer names than in input, skip it
+                    if (person.Names.Length < inputWords.Length)
+                    {
+                        continue;
+                    }
+
+                    // Check if person match intersects through all results
+                    if (!PersonExistsInAllMatches(person, inputWordsMatches))
+                    {
+                        continue;
+                    }
+
+                    // Create results algorithm
+                    var namesSearchResult = CreateNamesSearchResult(
+                        inputWords, person, inputWordsMatches, searchOptions);
+
+                    // Add combined result to intersectedDictionary
+                    if (namesSearchResult.Names.Count > 0)
+                    {
+                        intersectedDictionary.Add(person, namesSearchResult);
+                    }
+                }
+            });
+
+        return intersectedDictionary;
+    }
+
+    private static Dictionary<PersonModel, NameSearchResultModel>[] MoveSmallestResultFirst(Dictionary<PersonModel, NameSearchResultModel>[] inputWordsMatches)
+    {
+        int pos = 0;
+        for (int i = 1; i < inputWordsMatches.Length; i++)
         {
-            // Check if person match intersects through all results
-            if (!PersonExistsInAllMatches(person, arrayOfMatches))
+            if (inputWordsMatches[i].Count < inputWordsMatches[pos].Count)
             {
-                continue;
-            }
-
-            // Create results algorithm
-            var namesSearchResult = CreateNamesSearchResult(inputWords, person, arrayOfMatches);
-
-            // Add combined result to intersectedDictionary
-            if (namesSearchResult.Names.Count > 0)
-            {
-                intersectedDictionary.Add(person, namesSearchResult);
+                pos = i;
             }
         }
 
-        return intersectedDictionary;
+        if (pos > 0)
+        {
+            (inputWordsMatches[0], inputWordsMatches[pos]) = (inputWordsMatches[pos], inputWordsMatches[0]);
+        }
+
+        return inputWordsMatches;
+    }
+
+    private enum CoefficientProcessingAlgorithm : byte
+    {
+        None,
+        Simple, // One input word matched several person names. Works only if searchOptions.AverageByInputCount == false
+        Hungarian // One person name matched several input words
     }
 
     private static NamesSearchResultModel CreateNamesSearchResult(
         WordModel[] inputWords,
         PersonModel person,
-        Dictionary<PersonModel, NameSearchResultModel>[] arrayOfMatches)
+        Dictionary<PersonModel, NameSearchResultModel>[] arrayOfMatches,
+        SearchOptions searchOptions)
     {
         var namesDictionary = new Dictionary<PersonNameModel, NamesSearchResultValueModel>(PersonNameModelComparer.Instance);
-        var namesSearchResult = new NamesSearchResultModel(Names: namesDictionary);
         var inputNameMatches = new Dictionary<int, double>[person.Names.Length];
-        var severalInputsForOnePersonName = false;
+        var algorithm = CoefficientProcessingAlgorithm.None;
+        var inputWordsIndices = searchOptions.AverageByInputCount ? null : new HashSet<int>(inputWords.Length);
 
         // Iterate through ALL persons names (not only matched by index)
         foreach (var name in person.Names)
@@ -256,57 +301,62 @@ public sealed class PersonSearcherService(
                 var searchResult = match[person];
 
                 // Search person name
-                if (searchResult.Names.TryGetValue(name, out var nameSearchResultValue))
+                if (!searchResult.Names.TryGetValue(name, out var nameSearchResultValue))
                 {
-                    // Number of same words in input exceeds same name count in person names - not a match!
-                    if (inputWords[nameSearchResultValue.InputWordIndex].SameCount > name.SameCount)
-                    {
-                        namesDictionary.Clear();
-                        return namesSearchResult;
-                    }
-
-                    inputNameMatch.Add(nameSearchResultValue.InputWordIndex, nameSearchResultValue.Coefficient);
-
-                    if (!severalInputsForOnePersonName)
-                    {
-                        // This condition changes the algorithm (several inputs matched one person name)
-                        if (inputNameMatch.Count > name.SameCount)
-                        {
-                            severalInputsForOnePersonName = true;
-                            continue;
-                        }
-
-                        ref var val = ref CollectionsMarshal.GetValueRefOrAddDefault(
-                            namesDictionary, name, out var valExists);
-
-                        if (!valExists)
-                        {
-                            val.Coefficient = nameSearchResultValue.Coefficient;
-                        }
-                    }
+                    continue;
                 }
-            }
 
-            ref var value = ref CollectionsMarshal.GetValueRefOrAddDefault(
-                namesDictionary, name, out var valueExists);
+                inputNameMatch.Add(nameSearchResultValue.InputWordIndex, nameSearchResultValue.Coefficient);
 
-            if (valueExists)
-            {
-                if (inputNameMatch.Count == 0 || name.SameIndex > inputNameMatch.Count)
+                if (algorithm != CoefficientProcessingAlgorithm.Hungarian)
                 {
-                    value.Coefficient = 0;
+                    if (inputNameMatch.Count > 1)
+                    {
+                        algorithm = CoefficientProcessingAlgorithm.Hungarian;
+                        continue;
+                    }
+
+                    ref var val = ref CollectionsMarshal.GetValueRefOrAddDefault(
+                        namesDictionary, name, out var valExists);
+
+                    if (!valExists)
+                    {
+                        val.Coefficient = nameSearchResultValue.Coefficient;
+                        val.InputWordIndex = nameSearchResultValue.InputWordIndex;
+                    }
+
+                    if (inputWordsIndices is not null && !inputWordsIndices.Add(nameSearchResultValue.InputWordIndex))
+                    {
+                        algorithm = CoefficientProcessingAlgorithm.Simple;
+
+                        // Correct coefficient taking maximum
+                        foreach (var (key, value) in namesDictionary)
+                        {
+                            if (value.InputWordIndex == nameSearchResultValue.InputWordIndex)
+                            {
+                                if (value.Coefficient > 0 && value.Coefficient < nameSearchResultValue.Coefficient)
+                                {
+                                    ref var correctedValue = ref namesDictionary.GetValueRefOrAddDefault(key);
+                                    correctedValue.Coefficient = 0;
+                                }
+                                else if (val.Coefficient > 0 && value.Coefficient > nameSearchResultValue.Coefficient)
+                                {
+                                    val.Coefficient = 0;
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
 
-        if (severalInputsForOnePersonName)
+        if (algorithm == CoefficientProcessingAlgorithm.Hungarian)
         {
-            var bestMatch = EvaluateBestMatch(inputNameMatches);
+            var bestMatch = HungarianBestMatch(inputNameMatches);
 
             foreach (var name in person.Names)
             {
-                ref var val = ref CollectionsMarshal.GetValueRefOrAddDefault(
-                    namesDictionary, name, out var valExists);
+                ref var val = ref namesDictionary.GetValueRefOrAddDefault(name);
 
                 if (bestMatch.TryGetValue(name.WordIndex, out var bestMatchValue))
                 {
@@ -315,74 +365,60 @@ public sealed class PersonSearcherService(
             }
         }
 
-        return namesSearchResult;
+        return new NamesSearchResultModel(Names: namesDictionary);
     }
 
     /// <summary>
-    /// Evaluation based om dynamic programming principle to find match with maximum average coefficient
+    /// Evaluation based om hungarian algorithm to find match with maximum average coefficient
     /// </summary>
     /// <param name="coefficients"></param>
     /// <returns></returns>
-    private static Dictionary<int, double> EvaluateBestMatch(Dictionary<int, double>[] coefficients)
+    internal static Dictionary<int, double> HungarianBestMatch(Dictionary<int, double>[] coefficients)
     {
-        int n = coefficients.Length;
-        int m = coefficients.Max(x => x.Count);
+        var matrix = ArrayOfDictionariesToMatrix(coefficients);
 
-        double[,] dp = new double[n, m];
-        int[,] path = new int[n, m];
+        var result = matrix.FindAssignments(HungarianAlgorithm.ExtremumType.Max);
 
-        for (int i = 0; i < m; i++)
+        var maxCoefficients = new Dictionary<int, double>(result.Length);
+        for (int i = 0; i < result.Length; i++)
         {
-            dp[0, i] = coefficients[0].GetValueOrDefault(i, 0);
-        }
-
-        for (int i = 1; i < n; i++)
-        {
-            for (int j = 0; j < m; j++)
-            {
-                dp[i, j] = 0;
-                path[i, j] = 0;
-
-                if (!coefficients[i].ContainsKey(j))
-                    continue;
-
-                for (int k = 0; k < m; k++)
-                {
-                    double maxCoefficientLocal = dp[i - 1, k] + coefficients[i][j];
-
-                    if (maxCoefficientLocal > dp[i, j])
-                    {
-                        dp[i, j] = maxCoefficientLocal;
-                        path[i, j] = k;
-                    }
-                }
-            }
-        }
-
-        double maxCoefficient = dp[n - 1, 0];
-        int lastIndex = 0;
-
-        for (int i = 1; i < m; i++)
-        {
-            if (dp[n - 1, i] > maxCoefficient)
-            {
-                maxCoefficient = dp[n - 1, i];
-                lastIndex = i;
-            }
-        }
-
-        var maxCoefficients = new Dictionary<int, double>();
-        for (int i = n - 1, j = lastIndex; i >= 0; i--)
-        {
-            if (coefficients[i].TryGetValue(j, out var value))
+            if (coefficients[i].TryGetValue(result[i], out var value))
             {
                 maxCoefficients.Add(i, value);
             }
-
-            j = path[i, j];
+            else
+            {
+                maxCoefficients.Add(i, 0);
+            }
         }
 
         return maxCoefficients;
+    }
+
+    private static int[,] ArrayOfDictionariesToMatrix(Dictionary<int, double>[] coeffs)
+    {
+        int rows = coeffs.Length;
+        int cols = coeffs.Max(d => d.Count > 0 ? d.Keys.Max() : 0) + 1;
+
+        // Matrix should be squared or algorithm may enter never ending loop if rows > cols!
+        if (rows != cols)
+        {
+            var max = Math.Max(rows, cols);
+            rows = max;
+            cols = max;
+        }
+
+        var matrix = new int[rows, cols];
+
+        for (int i = 0; i < rows; i++)
+        {
+            foreach (var kvp in coeffs[i])
+            {
+                matrix[i, kvp.Key] = (int)(kvp.Value * 10_000);
+            }
+        }
+
+        return matrix;
     }
 
     private static bool PersonExistsInAllMatches(

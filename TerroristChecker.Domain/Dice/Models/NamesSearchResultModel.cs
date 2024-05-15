@@ -2,4 +2,4 @@
 
 public record struct NamesSearchResultModel(Dictionary<PersonNameModel, NamesSearchResultValueModel> Names);
 
-public record struct NamesSearchResultValueModel(double Coefficient);
+public record struct NamesSearchResultValueModel(byte InputWordIndex, double Coefficient);

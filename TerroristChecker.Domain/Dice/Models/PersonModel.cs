@@ -1,6 +1,6 @@
-﻿namespace TerroristChecker.Domain.Dice.Models;
+namespace TerroristChecker.Domain.Dice.Models;
 
-public record struct PersonModel(
+public sealed record PersonModel(
     int Id,
     PersonNameModel[] Names,
     string FullName,

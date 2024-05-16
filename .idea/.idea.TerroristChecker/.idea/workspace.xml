@@ -10,36 +10,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f903c380-26d2-49ab-9973-fac313d5058e" name="Changes" comment="Added query caching behavior">
-      <change afterPath="$PROJECT_DIR$/TerroristChecker.Api/appsettings.Production.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TerroristChecker.Application.UnitTests/GlobalUsings.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TerroristChecker.Application.UnitTests/PersonSearcherServiceTests.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TerroristChecker.Application.UnitTests/TerroristChecker.Application.UnitTests.csproj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TerroristChecker.Application/Dice/HungarianAlgorithm.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TerroristChecker.Application/Tools/DictionaryExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerroristChecker/.idea/httpRequests/http-requests-log.http" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TerroristChecker/.idea/httpRequests/http-requests-log.http" afterDir="false" />
+    <list default="true" id="f903c380-26d2-49ab-9973-fac313d5058e" name="Changes" comment="New average coefficient calculation algorithm with cases: none, simple, hungarian. Speed improvements. Added TerroristChecker.Application.UnitTests.csproj for unit tests">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TerroristChecker/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TerroristChecker/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TerroristChecker.Api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TerroristChecker.Api/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TerroristChecker.Api/Properties/launchSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/TerroristChecker.Api/Properties/launchSettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TerroristChecker.Api/TerroristChecker.Api.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/TerroristChecker.Api/TerroristChecker.Api.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TerroristChecker.Api/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/TerroristChecker.Api/appsettings.Development.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TerroristChecker.Api/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/TerroristChecker.Api/appsettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TerroristChecker.Application.IntegrationTests/Dice/SearchTerroristsTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TerroristChecker.Application.IntegrationTests/Dice/SearchTerroristsTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TerroristChecker.Application.IntegrationTests/TerroristChecker.Application.IntegrationTests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/TerroristChecker.Application.IntegrationTests/TerroristChecker.Application.IntegrationTests.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TerroristChecker.Application/Behaviors/LoggingBehavior.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TerroristChecker.Application/Behaviors/LoggingBehavior.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TerroristChecker.Application/Cqrs/Queries/SearchTerrorists/SearchTerroristsQuery.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TerroristChecker.Application/Cqrs/Queries/SearchTerrorists/SearchTerroristsQuery.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TerroristChecker.Application/DependencyInjection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TerroristChecker.Application/DependencyInjection.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TerroristChecker.Application/Dice/Services/PersonSearcherService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TerroristChecker.Application/Dice/Services/PersonSearcherService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TerroristChecker.Application/Dice/Services/WordStorageService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TerroristChecker.Application/Dice/Services/WordStorageService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TerroristChecker.Application/TerroristChecker.Application.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/TerroristChecker.Application/TerroristChecker.Application.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TerroristChecker.Domain/Dice/Abstractions/IPersonSearcherService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TerroristChecker.Domain/Dice/Abstractions/IPersonSearcherService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TerroristChecker.Domain/Dice/Abstractions/SearchOptions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TerroristChecker.Domain/Dice/Models/SearchOptions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TerroristChecker.Domain/Dice/Models/NamesSearchResultModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TerroristChecker.Domain/Dice/Models/NamesSearchResultModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TerroristChecker.Domain/Dice/Models/PersonModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TerroristChecker.Domain/Dice/Models/PersonModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TerroristChecker.Domain/Dice/Models/PersonNameModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TerroristChecker.Domain/Dice/Models/PersonNameModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TerroristChecker.Domain/Dice/Models/WordModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TerroristChecker.Domain/Dice/Models/WordModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TerroristChecker.InfrastructureServices/DependencyInjection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TerroristChecker.InfrastructureServices/DependencyInjection.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TerroristChecker.sln" beforeDir="false" afterPath="$PROJECT_DIR$/TerroristChecker.sln" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -312,7 +284,7 @@
       <workItem from="1714632803720" duration="16259000" />
       <workItem from="1714720874744" duration="10484000" />
       <workItem from="1715584092450" duration="50224000" />
-      <workItem from="1715773695854" duration="11360000" />
+      <workItem from="1715773695854" duration="12527000" />
     </task>
     <task id="LOCAL-00001" summary="Parallel word search, average coefficient calculations fixes, optimizations">
       <option name="closed" value="true" />
@@ -330,7 +302,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715181208640</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="New average coefficient calculation algorithm with cases: none, simple, hungarian. Speed improvements. Added TerroristChecker.Application.UnitTests.csproj for unit tests">
+      <option name="closed" value="true" />
+      <created>1715789439262</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1715789439262</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -353,7 +333,8 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="Parallel word search, average coefficient calculations fixes, optimizations" />
     <MESSAGE value="Added query caching behavior" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added query caching behavior" />
+    <MESSAGE value="New average coefficient calculation algorithm with cases: none, simple, hungarian. Speed improvements. Added TerroristChecker.Application.UnitTests.csproj for unit tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="New average coefficient calculation algorithm with cases: none, simple, hungarian. Speed improvements. Added TerroristChecker.Application.UnitTests.csproj for unit tests" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

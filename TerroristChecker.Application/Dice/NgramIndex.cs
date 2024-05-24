@@ -6,14 +6,14 @@ using TerroristChecker.Domain.Dice.ValueObjects;
 
 namespace TerroristChecker.Application.Dice;
 
-internal sealed class NgramIndex<TIndexKey, TIndexValue>(int capacity)
+internal sealed class NgramIndex<TIndexKey, TIndexValue>(int capacity, int? n = null)
     where TIndexKey : INgramIndexKey
     where TIndexValue : notnull
 {
     private Dictionary<Ngram, Dictionary<TIndexKey, TIndexValue>> NgramDict { get; } =
         new(capacity, NgramComparer.Instance);
 
-    private int _n = 3;
+    private int _n = n ?? 3;
 
     // Length of n-gram to use (recommended number is '3', trigram)
     public int N
@@ -36,8 +36,9 @@ internal sealed class NgramIndex<TIndexKey, TIndexValue>(int capacity)
 
     public NgramIndex(
         int capacity,
+        int? n,
         IEqualityComparer<TIndexKey>? indexKeyEqualityComparer,
-        IEqualityComparer<TIndexValue>? indexValueEqualityComparer = null) : this(capacity)
+        IEqualityComparer<TIndexValue>? indexValueEqualityComparer = null) : this(capacity, n)
     {
         IndexKeyEqualityComparer = indexKeyEqualityComparer;
         IndexValueEqualityComparer = indexValueEqualityComparer;
@@ -95,6 +96,7 @@ internal sealed class NgramIndex<TIndexKey, TIndexValue>(int capacity)
         Dictionary<TIndexKey, NgramSearchResultModel> result = new(64, IndexKeyEqualityComparer);
 
         var nGrams = StringToNgramArray(input);
+        var n = N;
 
         foreach (var nGram in nGrams)
         {
@@ -103,24 +105,24 @@ internal sealed class NgramIndex<TIndexKey, TIndexValue>(int capacity)
                 continue;
             }
 
-            foreach (var (indexKey, indexValue) in indexValues)
+            foreach (var index in indexValues)
             {
-                if (externalFilter is not null && !externalFilter(indexKey, indexValue))
+                if (externalFilter is not null && !externalFilter(index.Key, index.Value))
                 {
                     continue;
                 }
 
-                ref var resultVal = ref CollectionsMarshal.GetValueRefOrAddDefault(result, indexKey, out var resultValExists);
+                ref var resultVal = ref CollectionsMarshal.GetValueRefOrAddDefault(result, index.Key, out var resultValExists);
 
                 if (resultValExists)
                 {
                     resultVal.Matches++;
-                    resultVal.Coefficient = 2 * resultVal.Matches / (double)(nGrams.Length + indexKey.GetNgramCount());
+                    resultVal.Coefficient = 2 * resultVal.Matches / (double)(nGrams.Length + index.Key.GetLength() - (n - 1));
                 }
                 else
                 {
                     resultVal.Matches = 1;
-                    resultVal.Coefficient = 2 / (double)(nGrams.Length + indexKey.GetNgramCount());
+                    resultVal.Coefficient = 2 / (double)(nGrams.Length + index.Key.GetLength() - (n - 1));
                 }
             }
         }

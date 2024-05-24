@@ -6,5 +6,5 @@ public sealed record PersonNameModel(PersonModel Person, byte WordIndex, string 
 {
     public override string? ToString() => Name;
 
-    public int GetNgramCount() => Name.Length - 2;
+    public int GetLength() => Name.Length;
 }

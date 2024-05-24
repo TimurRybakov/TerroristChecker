@@ -1,6 +1,6 @@
-﻿namespace TerroristChecker.Domain.Dice.Abstractions;
+namespace TerroristChecker.Domain.Dice.Abstractions;
 
 public interface INgramIndexKey
 {
-    int GetNgramCount();
+    int GetLength();
 }

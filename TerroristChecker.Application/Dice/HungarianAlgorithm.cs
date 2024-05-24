@@ -97,23 +97,6 @@ public static class HungarianAlgorithm
         return agentsTasks;
     }
 
-    private static int[,] ConvertToIntegerCosts(double[,] costs)
-    {
-        int n = costs.GetLength(0);
-        int m = costs.GetLength(1);
-        int[,] intCostMatrix = new int[n, m];
-
-        for (int i = 0; i < n; i++)
-        {
-            for (int j = 0; j < m; j++)
-            {
-                intCostMatrix[i, j] = (int)(costs[i, j] * 10_000);
-            }
-        }
-
-        return intCostMatrix;
-    }
-
     private static int RunStep1(byte[,] masks, bool[] colsCovered, int w, int h)
     {
         for (var i = 0; i < h; i++)

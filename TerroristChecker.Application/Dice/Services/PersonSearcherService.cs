@@ -1,7 +1,7 @@
-using System.Collections.Concurrent;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
 using TerroristChecker.Application.Dice.Models;
@@ -16,10 +16,12 @@ namespace TerroristChecker.Application.Dice.Services;
 public sealed class PersonSearcherService(
     int capacity,
     ILogger<PersonSearcherService> logger,
-    IWordStorageService wordStorageService) : IPersonSearcherService
+    IWordStorageService wordStorageService,
+    IConfiguration configuration) : IPersonSearcherService
 {
     private readonly NgramIndex<PersonNameModel, PersonModel> _index = new(
         capacity * 2,
+        configuration.GetValue<int?>("SearchAlgorithm:Ngrams"),
         PersonNameModelComparer.Instance,
         PersonModelComparer.Instance);
 
@@ -53,7 +55,6 @@ public sealed class PersonSearcherService(
         string input,
         SearchOptions? searchOptions = null)
     {
-        logger.LogDebug("Input string: {Input}", input);
         (KeyValuePair<PersonModel,NamesSearchResultModel> Person, double AvgCoefficient)[]? orderedResults = null;
         try
         {
@@ -72,13 +73,6 @@ public sealed class PersonSearcherService(
                 MaxDegreeOfParallelism = Environment.ProcessorCount
             };
 
-            // for (int inputWordIndex = 0; inputWordIndex < inputWords.Length; inputWordIndex++)
-            // {
-            //     var word = inputWords[inputWordIndex];
-            //     var inputWordMatch = SearchPersonsByWord(word, inputWords.Length, searchOptionsInternal);
-            //
-            //     inputWordsMatches[inputWordIndex] = inputWordMatch.Persons;
-            // }
             Parallel.For(0, inputWords.Length, options, (inputWordIndex, state) =>
             {
                 if (state.IsStopped)
@@ -103,20 +97,21 @@ public sealed class PersonSearcherService(
                 return null;
             }
 
-            var result = IntersectMany(inputWords, searchOptionsInternal, inputWordsMatches);
+            var results = IntersectMany(inputWords, searchOptionsInternal, inputWordsMatches);
 
-            orderedResults = FilterAvgCoefficientAndOrderResults(inputWords, result, searchOptionsInternal);
+            orderedResults = FilterAvgCoefficientAndOrderResults(inputWords, results, searchOptionsInternal);
 
-            if (logger.IsEnabled(LogLevel.Debug) && orderedResults?.Length > 0)
+            if (logger.IsEnabled(LogLevel.Information) && orderedResults?.Length > 0)
             {
-                var personId = orderedResults[0].Person.Key.Id;
-                var personName = orderedResults[0].Person.Key.FullName;
-                var personBirthday = orderedResults[0].Person.Key.Birthday;
-                var averageCoefficient = orderedResults[0].AvgCoefficient;
-                logger.LogDebug(
-                    "Best match person Id = {PersonId}, Name = '{PersonName}', " +
+                var result = orderedResults[0];
+                var personId = result.Person.Key.Id;
+                var personName = result.Person.Key.FullName;
+                var personBirthday = result.Person.Key.Birthday;
+                var averageCoefficient = result.AvgCoefficient;
+                logger.LogInformation(
+                    "Input string: {Input}: Best match person Id = {PersonId}, Name = '{PersonName}', " +
                     "Birthday = {PersonBirthday}, Average coefficient: {AverageCoefficient}",
-                    personId, personName, personBirthday, averageCoefficient);
+                    input, personId, personName, personBirthday, averageCoefficient);
             }
 
             return orderedResults;
@@ -124,7 +119,7 @@ public sealed class PersonSearcherService(
         finally
         {
             if (orderedResults?.Length == 0)
-                logger.LogDebug("No matches for {Input}", input);
+                logger.LogInformation("Input string: {Input}: No matches", input);
         }
     }
 
@@ -192,7 +187,6 @@ public sealed class PersonSearcherService(
                     Names: group.ToDictionary(
                         kvp => kvp.Key,
                         kvp => new NameSearchResultValueModel(
-                            //Count: group.Key.Names.Count(names => string.Equals(names.Name, kvp.Key.Name)),
                             inputWord.Index,
                             kvp.Value.Coefficient))
                 ),
@@ -215,40 +209,45 @@ public sealed class PersonSearcherService(
         // Optimization: better start from smallest result
         inputWordsMatches = MoveSmallestResultFirst(inputWordsMatches);
 
+        var inputWordsMatch = inputWordsMatches[0];
+
         Dictionary<PersonModel, NamesSearchResultModel> intersectedDictionary =
-            new(inputWordsMatches[0].Count, PersonModelComparer.Instance);
+            new(inputWordsMatch.Count, PersonModelComparer.Instance);
 
-        const int chunkSize = 100;
-        Parallel.ForEach(
-            inputWordsMatches[0]
-                .Chunk(chunkSize), chunk =>
+        int chunkSize = inputWordsMatch.Count / Environment.ProcessorCount;
+        if (chunkSize == 0)
+        {
+            chunkSize = 1;
+        }
+
+        Parallel.ForEach(inputWordsMatch.Chunk(chunkSize), chunk =>
+        {
+            // Iterate through each person to search for intersections
+            foreach (var item in chunk)
             {
-                // Iterate through each person to search for intersections
-                foreach (var (person, _) in chunk)
+                // If person has fewer names than in input, skip it
+                if (item.Key.Names.Length < inputWords.Length)
                 {
-                    // If person has fewer names than in input, skip it
-                    if (person.Names.Length < inputWords.Length)
-                    {
-                        continue;
-                    }
-
-                    // Check if person match intersects through all results
-                    if (!PersonExistsInAllMatches(person, inputWordsMatches))
-                    {
-                        continue;
-                    }
-
-                    // Create results algorithm
-                    var namesSearchResult = CreateNamesSearchResult(
-                        inputWords, person, inputWordsMatches, searchOptions);
-
-                    // Add combined result to intersectedDictionary
-                    if (namesSearchResult.Names.Count > 0)
-                    {
-                        intersectedDictionary.Add(person, namesSearchResult);
-                    }
+                    continue;
                 }
-            });
+
+                // Check if person match intersects through all results
+                if (!PersonExistsInAllMatches(item.Key, inputWordsMatches))
+                {
+                    continue;
+                }
+
+                // Create results algorithm
+                var namesSearchResult = CreateNamesSearchResult(
+                    inputWords, item.Key, inputWordsMatches, searchOptions);
+
+                // Add combined result to intersectedDictionary
+                if (namesSearchResult.Names.Count > 0)
+                {
+                    intersectedDictionary.Add(item.Key, namesSearchResult);
+                }
+            }
+        });
 
         return intersectedDictionary;
     }
@@ -347,6 +346,12 @@ public sealed class PersonSearcherService(
                         }
                     }
                 }
+            }
+
+            if (!searchOptions.AverageByInputCount)
+            {
+                // Ensure defalt zero coefficient is added if person name not matched any input
+                CollectionsMarshal.GetValueRefOrAddDefault(namesDictionary, name, out _);
             }
         }
 

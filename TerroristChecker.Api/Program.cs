@@ -36,7 +36,7 @@ finally
     Log.CloseAndFlush();
 }
 
-void Run(string[] strings)
+static void Run(string[] strings)
 {
     var builder = WebApplication.CreateBuilder(strings);
     builder.Host.UseSerilog((context, configuration) => configuration.ReadFrom.Configuration(context.Configuration));

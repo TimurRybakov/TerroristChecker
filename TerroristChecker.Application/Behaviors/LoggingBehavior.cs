@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using System.Globalization;
 
 using Humanizer;
@@ -24,34 +24,41 @@ internal sealed class LoggingBehavior<TRequest, TResponse>(ILogger<TRequest> log
 
         try
         {
-            logger.LogInformation("Executing command or query {Command}", name);
+            if (logger.IsEnabled(LogLevel.Debug))
+            {
+                logger.LogDebug("Executing command or query {Command}", name);
 
-            var process = Process.GetCurrentProcess();
-            var stopWatch = new Stopwatch();
+                var process = Process.GetCurrentProcess();
+                var stopWatch = new Stopwatch();
 
-            var startTime = DateTime.UtcNow;
-            var startCpuUsage = process.TotalProcessorTime;
+                var startTime = DateTime.UtcNow;
+                var startCpuUsage = process.TotalProcessorTime;
 
-            stopWatch.Start();
+                stopWatch.Start();
 
-            var result = await next();
+                var result = await next();
 
-            stopWatch.Stop();
+                stopWatch.Stop();
 
-            var endTime = DateTime.UtcNow;
-            var endCpuUsage = process.TotalProcessorTime;
+                var endTime = DateTime.UtcNow;
+                var endCpuUsage = process.TotalProcessorTime;
 
-            var cpuUsedMs = (endCpuUsage - startCpuUsage).TotalMilliseconds;
-            var totalMsPassed = (endTime - startTime).TotalMilliseconds;
-            var cpuUsageTotal = cpuUsedMs / (Environment.ProcessorCount * totalMsPassed);
+                var cpuUsedMs = (endCpuUsage - startCpuUsage).TotalMilliseconds;
+                var totalMsPassed = (endTime - startTime).TotalMilliseconds;
+                var cpuUsageTotal = cpuUsedMs / (Environment.ProcessorCount * totalMsPassed);
 
-            var cpuUsagePercentage = Math.Round(cpuUsageTotal * 100, 4);
+                var cpuUsagePercentage = Math.Round(cpuUsageTotal * 100, 4);
 
-            logger.LogInformation(
-                "Command or query {Command} processed successfully (CPU: {CPU}%, {Elapsed})",
-                name, cpuUsagePercentage, stopWatch.Elapsed.Humanize(culture: CultureInfo.InvariantCulture));
+                logger.LogDebug(
+                    "Command or query {Command} processed successfully (CPU: {CPU}%, {Elapsed})",
+                    name, cpuUsagePercentage, stopWatch.Elapsed.Humanize(culture: CultureInfo.InvariantCulture));
 
-            return result;
+                return result;
+            }
+            else
+            {
+                return await next();
+            }
         }
         catch (Exception exception)
         {

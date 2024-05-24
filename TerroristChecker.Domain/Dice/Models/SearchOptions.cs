@@ -1,4 +1,4 @@
-﻿namespace TerroristChecker.Domain.Dice.Models;
+namespace TerroristChecker.Domain.Dice.Models;
 
 public sealed class SearchOptions
 {
@@ -33,7 +33,7 @@ public sealed class SearchOptions
 
     public double MinCoefficient { get; init; } = 0.39;
 
-    public double MinAverageCoefficient { get; init; } = 0.75;
+    public double MinAverageCoefficient { get; init; } = 0.73;
 
     public static readonly SearchOptions Default = new ();
 

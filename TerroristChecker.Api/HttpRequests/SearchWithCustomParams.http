@@ -1,8 +1,7 @@
-@TerroristChecker.Api_HostAddress = https://localhost:7082
 @input=abdulkarimov mogamed usmanovich
 @count=10
 @minCoefficient=0.41
 @minAverageCoefficient=0.4
 
-GET {{TerroristChecker.Api_HostAddress}}/terrorists/search/?input=abdulkarimov mogamed usmanovich&minCoefficient={{minCoefficient}}&minAverageCoefficient={{minAverageCoefficient}}&count={{count}}
+GET {{HostAddress}}/terrorists/search/?input={{input}}&minCoefficient={{minCoefficient}}&minAverageCoefficient={{minAverageCoefficient}}&count={{count}}
 Content-Type: text/plain

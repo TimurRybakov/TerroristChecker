@@ -1,17 +1,9 @@
-@TerroristChecker.Api_HostAddress = https://localhost:7082
 @input=Abd al-Khaliq Badr al-Din al-Huthi
 @yearOfBirth=1984
 
-GET {{TerroristChecker.Api_HostAddress}}/terrorists/search/?input={{input}}&yearOfBirth={{yearOfBirth}}
-Content-Type: application/json
+GET {{HostAddress}}/terrorists/search?input={{input}}&yearOfBirth={{yearOfBirth}}
 
 ###
+GET {{HostAddress}}/terrorists/search?input={{input}}
 
-GET {{TerroristChecker.Api_HostAddress}}/terrorists/search/?input={{input}}
-Content-Type: text/plain
-
-> {%
-    client.global.set("input", "Abd al-Khaliq Badr al-Din Huthi")
-%}
-###
 

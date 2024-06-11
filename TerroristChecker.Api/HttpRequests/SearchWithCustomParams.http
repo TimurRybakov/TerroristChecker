@@ -1,7 +1,7 @@
 @input=abdulkarimov mogamed usmanovich
 @count=10
-@minCoefficient=0.41
-@minAverageCoefficient=0.4
+@minCoefficient=0.50
+@minAverageCoefficient=0.73
 
 GET {{HostAddress}}/terrorists/search/?input={{input}}&minCoefficient={{minCoefficient}}&minAverageCoefficient={{minAverageCoefficient}}&count={{count}}
 Content-Type: text/plain

@@ -31,7 +31,7 @@ public sealed class SearchOptions
 
     public int? YearOfBirth { get; init; } = null;
 
-    public double MinCoefficient { get; init; } = 0.39;
+    public double MinCoefficient { get; init; } = 0.7;
 
     public double MinAverageCoefficient { get; init; } = 0.73;
 

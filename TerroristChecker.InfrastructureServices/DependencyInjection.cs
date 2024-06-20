@@ -9,20 +9,11 @@ namespace TerroristChecker.InfrastructureServices;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddCaching(this IServiceCollection services, IConfiguration configuration,
-      bool isDevelopment)
+    public static IServiceCollection AddCaching(this IServiceCollection services, IConfiguration configuration, bool isDevelopment)
     {
-        if (isDevelopment)
-        {
-            services.AddMemoryCache(o => o.SizeLimit = 5_000);
-            services.AddSingleton<IDistributedCache, MemoryDistributedCache>();
-        }
-        else
-        {
-            string connectionString = configuration.GetConnectionString("Cache") ??
-                                      throw new Exception("Cache connection string is not defined in configuration file");
-            services.AddStackExchangeRedisCache(options => options.Configuration = connectionString);
-        }
+        string connectionString = configuration.GetConnectionString("Cache") ??
+                                    throw new Exception("Cache connection string is not defined in configuration file");
+        services.AddStackExchangeRedisCache(options => options.Configuration = connectionString);
 
         services.AddSingleton<ICacheService, CacheService>();
 

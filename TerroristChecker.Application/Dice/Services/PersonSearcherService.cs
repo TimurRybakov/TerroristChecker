@@ -101,7 +101,7 @@ public sealed class PersonSearcherService(
 
             orderedResults = FilterAvgCoefficientAndOrderResults(inputWords, results, searchOptionsInternal);
 
-            if (logger.IsEnabled(LogLevel.Information) && orderedResults?.Length > 0)
+            if (logger.IsEnabled(LogLevel.Information) && orderedResults.Length > 0)
             {
                 var result = orderedResults[0];
                 var personId = result.Person.Key.Id;
@@ -206,7 +206,7 @@ public sealed class PersonSearcherService(
             return new Dictionary<PersonModel, NamesSearchResultModel>(PersonModelComparer.Instance);
         }
 
-        // Optimization: better start from smallest result
+        // Optimization: better start from the smallest result
         inputWordsMatches = MoveSmallestResultFirst(inputWordsMatches);
 
         var inputWordsMatch = inputWordsMatches[0];
@@ -350,7 +350,7 @@ public sealed class PersonSearcherService(
 
             if (!searchOptions.AverageByInputCount)
             {
-                // Ensure defalt zero coefficient is added if person name not matched any input
+                // Ensure default zero coefficient is added if person name not matched any input
                 CollectionsMarshal.GetValueRefOrAddDefault(namesDictionary, name, out _);
             }
         }
@@ -374,7 +374,7 @@ public sealed class PersonSearcherService(
     }
 
     /// <summary>
-    /// Evaluation based om hungarian algorithm to find match with maximum average coefficient
+    /// Evaluation based on hungarian algorithm to find match with maximum average coefficient
     /// </summary>
     /// <param name="coefficients"></param>
     /// <returns></returns>
@@ -400,10 +400,10 @@ public sealed class PersonSearcherService(
         return maxCoefficients;
     }
 
-    private static int[,] ArrayOfDictionariesToMatrix(Dictionary<int, double>[] coeffs)
+    private static int[,] ArrayOfDictionariesToMatrix(Dictionary<int, double>[] coefficients)
     {
-        int rows = coeffs.Length;
-        int cols = coeffs.Max(d => d.Count > 0 ? d.Keys.Max() : 0) + 1;
+        int rows = coefficients.Length;
+        int cols = coefficients.Max(d => d.Count > 0 ? d.Keys.Max() : 0) + 1;
 
         // Matrix should be squared or algorithm may enter never ending loop if rows > cols!
         if (rows != cols)
@@ -417,7 +417,7 @@ public sealed class PersonSearcherService(
 
         for (int i = 0; i < rows; i++)
         {
-            foreach (var kvp in coeffs[i])
+            foreach (var kvp in coefficients[i])
             {
                 matrix[i, kvp.Key] = (int)(kvp.Value * 10_000);
             }

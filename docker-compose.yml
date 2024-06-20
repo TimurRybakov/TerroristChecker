@@ -1,0 +1,49 @@
+version: '3.4'
+
+services:
+
+  terroristchecker.api:
+    container_name: terroristchecker.api
+    ports:
+      - "7081:7081"
+      - "7082:7082"
+    image: ${DOCKER_REGISTRY-}terroristcheckerapi
+    build:
+      context: .
+      dockerfile: TerroristChecker.Api/Dockerfile
+    depends_on:
+      terroristchecker.database:
+        condition: service_healthy
+      terroristchecker.cache:
+        condition: service_started
+    restart: always
+
+  terroristchecker.database:
+    container_name: terroristchecker.database
+    ports:
+      - "5432:5432"
+    image: postgres:14.12-alpine3.20
+    environment:
+      - POSTGRES_DB=terrorists
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=123
+    volumes:
+      - ./.containers/terroristchecker.database:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d terrorists -U admin"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    restart: always
+
+  terroristchecker.cache:
+    container_name: terroristchecker.cache
+    ports:
+      - "6379:6379"
+    image: redis:7.2.5
+    restart: always
+
+networks:
+  default:
+    name: terroristchecker

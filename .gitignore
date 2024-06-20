@@ -364,3 +364,6 @@ FodyWeavers.xsd
 
 # Idea cache directory
 .idea/
+
+# Containers local volumes
+.containers/

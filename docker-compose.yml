@@ -12,17 +12,17 @@ services:
       context: .
       dockerfile: TerroristChecker.Api/Dockerfile
     depends_on:
-      terroristchecker.database:
+      terroristchecker.database.server:
         condition: service_healthy
       terroristchecker.cache:
         condition: service_started
     restart: always
 
-  terroristchecker.database:
-    container_name: terroristchecker.database
+  terroristchecker.database.server:
+    container_name: terroristchecker.database.server
     ports:
       - "5432:5432"
-    image: postgres:14.12-alpine3.20
+    image: postgres:16.3-alpine3.20
     environment:
       - POSTGRES_DB=terrorists
       - POSTGRES_USER=admin
@@ -37,6 +37,19 @@ services:
       start_period: 30s
     restart: always
 
+  terroristchecker.database.server.pgadmin:
+    container_name: terroristchecker.database.server.pgadmin
+    ports:
+      - 7083:80
+    image: dpage/pgadmin4:8.8
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=trybakov@gmail.com
+      - PGADMIN_DEFAULT_PASSWORD=123
+      - PGADMIN_LISTEN_PORT=80
+    volumes:
+      - pgadmin_data:/home/rundeck/server/data
+      - pgadmin:/var/lib/pgadmin
+
   terroristchecker.cache:
     container_name: terroristchecker.cache
     ports:
@@ -44,6 +57,10 @@ services:
     image: redis:7.2.5
     restart: always
 
+volumes:
+  pgadmin_data:
+  pgadmin:  
+  
 networks:
   default:
     name: terroristchecker

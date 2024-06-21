@@ -63,7 +63,7 @@ static void Run(string[] strings)
         app.UseSwagger();
         app.UseSwaggerUI();
     }
-
+    
     app.UseMiddleware<ExceptionHandlingMiddleware>();
     //app.UseHttpsRedirection();
     app.UsePersonCacheInitialization();

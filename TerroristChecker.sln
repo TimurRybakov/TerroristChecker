@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TerroristChecker.Domain", "TerroristChecker.Domain\TerroristChecker.Domain.csproj", "{E0F0D272-DA84-429A-8B49-F88CC8C20A2C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{084C9887-9468-4AD5-9060-2292EEBE65D6}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{CC9D880E-FB2E-4069-88B7-8506F480B81F}"
 EndProject
@@ -89,5 +92,8 @@ Global
 		{DFCFB038-2EFC-47AD-9F60-3DE0C3EBD89E} = {603979E9-A5A2-41EE-ABCD-311503D70E3D}
 		{BD528BF7-8578-479B-A716-CF15B89383C4} = {05B562C0-847B-427E-8FEB-75D7D8726772}
 		{18C5502B-4FBF-44FF-AA92-1EBBC452B6BA} = {603979E9-A5A2-41EE-ABCD-311503D70E3D}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {62BDBC09-5C4F-4050-903E-B1935367CB76}
 	EndGlobalSection
 EndGlobal

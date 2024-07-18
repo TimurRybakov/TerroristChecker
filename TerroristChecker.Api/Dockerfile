@@ -27,3 +27,4 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "TerroristChecker.Api.dll"]
+#dotnet  ./bin/Debug/net8.0/TerroristChecker.Api.dll

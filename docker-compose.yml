@@ -7,7 +7,7 @@ services:
     ports:
       - "7081:7081"
       - "7082:7082"
-    image: ${DOCKER_REGISTRY-}terroristcheckerapi
+    image: ${DOCKER_REGISTRY-}terroristchecker-api
     build:
       context: .
       dockerfile: TerroristChecker.Api/Dockerfile
@@ -16,7 +16,7 @@ services:
         condition: service_healthy
       terroristchecker.cache:
         condition: service_started
-    restart: always
+    restart: unless-stopped
 
   terroristchecker.database.server:
     container_name: terroristchecker.database.server
@@ -28,14 +28,15 @@ services:
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=123
     volumes:
-      - ./.containers/terroristchecker.database:/var/lib/postgresql/data
+      - ./TerroristChecker.Persistence/Data:/docker-entrypoint-initdb.d
+      - terrorists_db:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -d terrorists -U admin"]
       interval: 5s
       timeout: 5s
       retries: 5
       start_period: 30s
-    restart: always
+    restart: unless-stopped
 
   terroristchecker.database.server.pgadmin:
     container_name: terroristchecker.database.server.pgadmin
@@ -43,23 +44,28 @@ services:
       - 7083:80
     image: dpage/pgadmin4:8.8
     environment:
-      - PGADMIN_DEFAULT_EMAIL=trybakov@gmail.com
+      - PGADMIN_DEFAULT_EMAIL=admin@gmail.com
       - PGADMIN_DEFAULT_PASSWORD=123
       - PGADMIN_LISTEN_PORT=80
     volumes:
       - pgadmin_data:/home/rundeck/server/data
       - pgadmin:/var/lib/pgadmin
+    restart: unless-stopped
 
   terroristchecker.cache:
     container_name: terroristchecker.cache
     ports:
       - "6379:6379"
     image: redis:7.2.5
-    restart: always
+    restart: unless-stopped
 
 volumes:
+  terrorists_db:
+    name: terroristchecker_database
   pgadmin_data:
-  pgadmin:  
+    name: terroristchecker_database_server_pgadmin_data
+  pgadmin:
+    name: terroristchecker_database_server_pgadmin
   
 networks:
   default:

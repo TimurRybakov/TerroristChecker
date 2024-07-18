@@ -1,7 +1,4 @@
 -- Table: public.terrorists
-
--- DROP TABLE IF EXISTS public.terrorists1;
-
 CREATE TABLE IF NOT EXISTS public.terrorists
 (
     id integer NOT NULL,
@@ -13,5 +10,4 @@ CREATE TABLE IF NOT EXISTS public.terrorists
 
 TABLESPACE pg_default;
 
---ALTER TABLE IF EXISTS public.terrorists
---    OWNER to ru_svc_terrorists_user;
+COPY public.terrorists FROM '/docker-entrypoint-initdb.d/terrorists.csv' CSV;

@@ -1,5 +1,7 @@
 version: '3.4'
 
+name: terroristchecker
+
 services:
 
   terroristchecker.api:
@@ -28,7 +30,8 @@ services:
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=123
     volumes:
-      - ./TerroristChecker.Persistence/Data:/docker-entrypoint-initdb.d
+      - ./TerroristChecker.Persistence/Data/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+      - ./TerroristChecker.Persistence/Data/terrorists.csv:/docker-entrypoint-initdb.d/terrorists.csv
       - terrorists_db:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -d terrorists -U admin"]
@@ -58,6 +61,8 @@ services:
       - "6379:6379"
     image: redis:7.2.5
     restart: unless-stopped
+    volumes:
+      - cache:/data
 
 volumes:
   terrorists_db:
@@ -66,7 +71,9 @@ volumes:
     name: terroristchecker_database_server_pgadmin_data
   pgadmin:
     name: terroristchecker_database_server_pgadmin
-  
+  cache:
+    name: terroristchecker_cache
+
 networks:
   default:
     name: terroristchecker

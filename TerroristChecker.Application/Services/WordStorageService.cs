@@ -1,7 +1,7 @@
 using TerroristChecker.Domain.Dice.Abstractions;
 using TerroristChecker.Domain.Dice.Models;
 
-namespace TerroristChecker.Application.Dice.Services;
+namespace TerroristChecker.Application.Services;
 
 /// <summary>
 /// Stores all words in a unique set to reduce memory allocations.
@@ -10,7 +10,7 @@ namespace TerroristChecker.Application.Dice.Services;
 /// <param name="wordSeparators">Symbols to separate words in a multiwords strings passed to ParseWords method.</param>
 public sealed class WordStorageService(int capacity, char[]? wordSeparators = null) : IWordStorageService
 {
-    private readonly HashSet<string> _words = new (capacity);
+    private readonly HashSet<string> _words = new(capacity);
 
     private char[] WordSeparators { get; set; } = wordSeparators ?? [' ', '-'];
 
@@ -31,7 +31,7 @@ public sealed class WordStorageService(int capacity, char[]? wordSeparators = nu
         }
 
         var results = wordsArray
-            .Select((unpreparedWord, i) => new WordModel(Value: prepareWord(unpreparedWord), Index: (byte)i ))
+            .Select((unpreparedWord, i) => new WordModel(Value: prepareWord(unpreparedWord), Index: (byte)i))
             .OrderBy(w => w.Index)
             .ToArray();
 

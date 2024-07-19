@@ -1,10 +1,10 @@
 using System.Runtime.InteropServices;
 
-using TerroristChecker.Application.Dice.Models;
+using TerroristChecker.Application.Models;
 using TerroristChecker.Domain.Dice.Abstractions;
 using TerroristChecker.Domain.Dice.ValueObjects;
 
-namespace TerroristChecker.Application.Dice;
+namespace TerroristChecker.Application.Tools;
 
 internal sealed class NgramIndex<TIndexKey, TIndexValue>(int capacity, int? n = null)
     where TIndexKey : INgramIndexKey

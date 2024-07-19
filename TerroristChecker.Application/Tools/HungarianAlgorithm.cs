@@ -1,4 +1,4 @@
-namespace TerroristChecker.Application.Dice;
+namespace TerroristChecker.Application.Tools;
 
 /// <summary>
 /// Hungarian Algorithm.
@@ -172,7 +172,7 @@ public static class HungarianAlgorithm
     }
     private static int RunStep4(int[,] costs, bool[] rowsCovered, bool[] colsCovered, int w, int h)
     {
-        var minValue = HungarianAlgorithm.FindMinimum(costs, rowsCovered, colsCovered, w, h);
+        var minValue = FindMinimum(costs, rowsCovered, colsCovered, w, h);
 
         for (var i = 0; i < h; i++)
         {
@@ -288,8 +288,8 @@ public static class HungarianAlgorithm
 
         internal Location(int row, int col)
         {
-            this.Row = row;
-            this.Column = col;
+            Row = row;
+            Column = col;
         }
     }
 }

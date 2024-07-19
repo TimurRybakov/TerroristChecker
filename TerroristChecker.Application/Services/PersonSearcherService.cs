@@ -4,14 +4,14 @@ using System.Runtime.InteropServices;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-using TerroristChecker.Application.Dice.Models;
+using TerroristChecker.Application.Models;
 using TerroristChecker.Application.Tools;
 using TerroristChecker.Domain.Dice.Abstractions;
 using TerroristChecker.Domain.Dice.Models;
 
 [assembly: InternalsVisibleTo("TerroristChecker.Application.UnitTests")]
 
-namespace TerroristChecker.Application.Dice.Services;
+namespace TerroristChecker.Application.Services;
 
 public sealed class PersonSearcherService(
     int capacity,
@@ -51,11 +51,11 @@ public sealed class PersonSearcherService(
         _index.Clear();
     }
 
-    public (KeyValuePair<PersonModel,NamesSearchResultModel> Person, double AvgCoefficient)[]? Search(
+    public (KeyValuePair<PersonModel, NamesSearchResultModel> Person, double AvgCoefficient)[]? Search(
         string input,
         SearchOptions? searchOptions = null)
     {
-        (KeyValuePair<PersonModel,NamesSearchResultModel> Person, double AvgCoefficient)[]? orderedResults = null;
+        (KeyValuePair<PersonModel, NamesSearchResultModel> Person, double AvgCoefficient)[]? orderedResults = null;
         try
         {
             var inputWords = wordStorageService.ParseWords(input, w => _index.PrepareWord(w));
@@ -65,7 +65,7 @@ public sealed class PersonSearcherService(
             }
 
             var searchOptionsInternal = searchOptions ?? SearchOptions.Default;
-            Dictionary<PersonModel, NameSearchResultModel>[] inputWordsMatches =
+            var inputWordsMatches =
                 new Dictionary<PersonModel, NameSearchResultModel>[inputWords.Length];
             var stopped = false;
             ParallelOptions options = new()
@@ -160,7 +160,7 @@ public sealed class PersonSearcherService(
             inputWord.Value,
             searchOptions.MinCoefficient,
             (_, person) => (
-                (birthday is null && (yearOfBirth is null || yearOfBirth == person.Birthday?.Year))
+                birthday is null && (yearOfBirth is null || yearOfBirth == person.Birthday?.Year)
                 || Nullable.Equals(birthday, person.Birthday)
                 ) && person.Names.Length >= inputWordsCount);
 
@@ -214,7 +214,7 @@ public sealed class PersonSearcherService(
         Dictionary<PersonModel, NamesSearchResultModel> intersectedDictionary =
             new(inputWordsMatch.Count, PersonModelComparer.Instance);
 
-        int chunkSize = inputWordsMatch.Count / Environment.ProcessorCount;
+        var chunkSize = inputWordsMatch.Count / Environment.ProcessorCount;
         if (chunkSize == 0)
         {
             chunkSize = 1;
@@ -254,8 +254,8 @@ public sealed class PersonSearcherService(
 
     private static Dictionary<PersonModel, NameSearchResultModel>[] MoveSmallestResultFirst(Dictionary<PersonModel, NameSearchResultModel>[] inputWordsMatches)
     {
-        int pos = 0;
-        for (int i = 1; i < inputWordsMatches.Length; i++)
+        var pos = 0;
+        for (var i = 1; i < inputWordsMatches.Length; i++)
         {
             if (inputWordsMatches[i].Count < inputWordsMatches[pos].Count)
             {
@@ -385,7 +385,7 @@ public sealed class PersonSearcherService(
         var result = matrix.FindAssignments(HungarianAlgorithm.ExtremumType.Max);
 
         var maxCoefficients = new Dictionary<int, double>(result.Length);
-        for (int i = 0; i < result.Length; i++)
+        for (var i = 0; i < result.Length; i++)
         {
             if (coefficients[i].TryGetValue(result[i], out var value))
             {
@@ -402,8 +402,8 @@ public sealed class PersonSearcherService(
 
     private static int[,] ArrayOfDictionariesToMatrix(Dictionary<int, double>[] coefficients)
     {
-        int rows = coefficients.Length;
-        int cols = coefficients.Max(d => d.Count > 0 ? d.Keys.Max() : 0) + 1;
+        var rows = coefficients.Length;
+        var cols = coefficients.Max(d => d.Count > 0 ? d.Keys.Max() : 0) + 1;
 
         // Matrix should be squared or algorithm may enter never ending loop if rows > cols!
         if (rows != cols)
@@ -415,7 +415,7 @@ public sealed class PersonSearcherService(
 
         var matrix = new int[rows, cols];
 
-        for (int i = 0; i < rows; i++)
+        for (var i = 0; i < rows; i++)
         {
             foreach (var kvp in coefficients[i])
             {

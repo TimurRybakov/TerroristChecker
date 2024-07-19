@@ -8,7 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 using TerroristChecker.Application.Behaviors;
 using TerroristChecker.Application.Cqrs.Commands.UpdatePersonCache;
-using TerroristChecker.Application.Dice.Services;
+using TerroristChecker.Application.Services;
 using TerroristChecker.Domain.Dice.Abstractions;
 
 namespace TerroristChecker.Application;

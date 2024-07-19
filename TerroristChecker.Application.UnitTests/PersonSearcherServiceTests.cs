@@ -1,6 +1,6 @@
 using FluentAssertions;
 
-using TerroristChecker.Application.Dice.Services;
+using TerroristChecker.Application.Services;
 
 namespace TerroristChecker.Application.UnitTests;
 

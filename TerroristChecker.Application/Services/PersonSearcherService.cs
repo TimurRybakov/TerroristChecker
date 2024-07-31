@@ -65,8 +65,7 @@ public sealed class PersonSearcherService(
             }
 
             var searchOptionsInternal = searchOptions ?? SearchOptions.Default;
-            var inputWordsMatches =
-                new Dictionary<PersonModel, NameSearchResultModel>[inputWords.Length];
+            var inputWordsMatches = new Dictionary<PersonModel, NameSearchResultModel>[inputWords.Length];
             var stopped = false;
             ParallelOptions options = new()
             {

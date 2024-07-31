@@ -1,4 +1,4 @@
-﻿using TerroristChecker.Domain.Dice.Models;
+using TerroristChecker.Domain.Dice.Models;
 
 namespace TerroristChecker.Domain.Dice.Abstractions;
 

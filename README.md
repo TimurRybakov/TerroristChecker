@@ -1,5 +1,9 @@
 # TerroristChecker
 
+![GitHub](https://img.shields.io/github/license/TimurRybakov/TerroristChecker)
+![GitHub top language](https://img.shields.io/github/languages/top/TimurRybakov/TerroristChecker)
+![GitHub Repo stars](https://img.shields.io/github/stars/TimurRybakov/TerroristChecker)
+
 API that provides checks of a person enlisted as terrorist using **fuzzy** string indexed search of it's name(s) by input string.
 
 Fuzzy matching is implemented individualy for every word in input string using Dice coefficient algorithm, where words are splitted in n-grams and indexed. Full name may include one or more words. Full name match is calculated as an average of each name coefficient. In complex cases when several input words matches several person's names best match is calculated using Hungarian algorithm.

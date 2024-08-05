@@ -3,6 +3,7 @@
 ![GitHub](https://img.shields.io/github/license/TimurRybakov/TerroristChecker)
 ![GitHub top language](https://img.shields.io/github/languages/top/TimurRybakov/TerroristChecker)
 ![GitHub Repo stars](https://img.shields.io/github/stars/TimurRybakov/TerroristChecker)
+[![HitCount](https://hits.dwyl.com/TimurRybakov/TerroristChecker.svg)](https://github.com/TimurRybakov/TerroristChecker)
 
 API that provides checks of a person enlisted as terrorist using **fuzzy** string indexed search of it's name(s) by input string.
 

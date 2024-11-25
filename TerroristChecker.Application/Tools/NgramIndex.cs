@@ -10,7 +10,7 @@ internal sealed class NgramIndex<TIndexKey, TIndexValue>(int capacity, int? n = 
     where TIndexKey : INgramIndexKey
     where TIndexValue : notnull
 {
-    private Dictionary<Ngram, Dictionary<TIndexKey, TIndexValue>> NgramDict { get; } =
+    private Dictionary<Ngram, Dictionary<TIndexKey, TIndexValue>> _ngramDict { get; } =
         new(capacity, NgramComparer.Instance);
 
     private int _n = n ?? 3;
@@ -26,8 +26,28 @@ internal sealed class NgramIndex<TIndexKey, TIndexValue>(int capacity, int? n = 
                 throw new ArgumentException("N should be >= 2 and <= 10.");
             }
 
-            _n = value;
+            if (_n != value)
+            {
+                _n = value;
+
+                SetBeginning();
+                SetEnding();
+            }
         }
+    }
+
+    private string _beginning = string.Empty;
+
+    private string _ending = string.Empty;
+
+    private void SetBeginning()
+    {
+        _beginning = new string('[', _n - 1);
+    }
+
+    private void SetEnding()
+    {
+        _ending = new string(']', _n - 1);
     }
 
     public IEqualityComparer<TIndexKey>? IndexKeyEqualityComparer { get; }
@@ -42,6 +62,9 @@ internal sealed class NgramIndex<TIndexKey, TIndexValue>(int capacity, int? n = 
     {
         IndexKeyEqualityComparer = indexKeyEqualityComparer;
         IndexValueEqualityComparer = indexValueEqualityComparer;
+
+        SetBeginning();
+        SetEnding();
     }
 
     public Ngram[] StringToNgramArray(string input)
@@ -67,7 +90,7 @@ internal sealed class NgramIndex<TIndexKey, TIndexValue>(int capacity, int? n = 
         foreach (var nGram in nGrams)
         {
             ref var nGramDictValue = ref CollectionsMarshal.GetValueRefOrAddDefault(
-                NgramDict, nGram, out var nGramDictValueExists);
+                _ngramDict, nGram, out var nGramDictValueExists);
 
             if (!nGramDictValueExists)
             {
@@ -80,7 +103,7 @@ internal sealed class NgramIndex<TIndexKey, TIndexValue>(int capacity, int? n = 
 
     public void Clear()
     {
-        NgramDict.Clear();
+        _ngramDict.Clear();
     }
 
     public Dictionary<TIndexKey, NgramSearchResultModel> GetMatches(
@@ -100,7 +123,7 @@ internal sealed class NgramIndex<TIndexKey, TIndexValue>(int capacity, int? n = 
 
         foreach (var nGram in nGrams)
         {
-            if (!NgramDict.TryGetValue(nGram, out var indexValues))
+            if (!_ngramDict.TryGetValue(nGram, out var indexValues))
             {
                 continue;
             }
@@ -145,6 +168,6 @@ internal sealed class NgramIndex<TIndexKey, TIndexValue>(int capacity, int? n = 
     {
         var n = N;
 
-        return string.Intern(new string('[', n - 1) + input.ToUpperInvariant() + new string(']', n - 1));
+        return string.Intern(string.Concat(_beginning, input.ToUpperInvariant(), _ending));
     }
 }
